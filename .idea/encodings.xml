@@ -2,7 +2,15 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/app.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/midleware/title.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/fonts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/contact.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/home.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/introduction.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/midleware/footer.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/midleware/menu.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/router.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/webpack.config.js" charset="UTF-8" />
   </component>
 </project>
