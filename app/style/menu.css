@@ -41,4 +41,5 @@
 .rui-nav li:last-child {
     border-right: 1px dotted #dddddd;
     padding-right: 25px;
+    padding-left: 45px;
 }

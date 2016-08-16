@@ -2,7 +2,82 @@ body {
     margin: 0;
     font-size: 16px;
     font-family: "Times News Roman", Times, serif;
+    overflow-x: hidden !important;
+}
+.rui-row {
+    margin-left: -15px;
+    margin-right: -15px;
+    display: block;
+}
+.rui-left {
+    float: left;
+}
+.rui-right {
+    float: right;
+}
+.rui-block {
+    display: block;
 }
 .home {
     height: 100%;
+}
+.rui_carousel img {
+    margin: 0 auto;
+}
+.roof {
+    background: url(/app/images/index_09.png) no-repeat;
+    width: 100%;
+    height: 32px;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+}
+
+.product_list img {
+    width: 297px;
+}
+
+/*自下而上的轮播*/
+.dyright{
+    width: 638px;
+    height: 557px;
+    overflow: hidden;
+}
+.rel {
+    position: relative;
+}
+.fr {
+    float: right;
+}
+.abs {
+    position: absolute;
+}
+.news {
+    width: 638px;
+    height: 127px;
+    margin-bottom: 18px;
+}
+.newspic {
+    margin-right: 15px;
+    width: 142px;
+    height: 125px;
+}
+.f1 {
+    float: left;
+}
+.news a {
+    color: #303030;
+    font-size: 18px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.news p {
+    width: 480px;
+    float: left;
+    font-size: 14px;
+    color: #6d6d6d;
+    line-height: 30px;
+    border-top: 1px dashed #808080;
+    margin-top: 18px;
 }
