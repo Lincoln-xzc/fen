@@ -27,7 +27,7 @@ module.exports = {
             },
             {
                 test: /\.(css|scss|less)$/,
-                loader:'./app/style'
+                loader:'style!css'
             }
         ]
     }

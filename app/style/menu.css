@@ -1,0 +1,44 @@
+.menuNav {
+    background-image: url("/app/images/index_01.jpg");
+    width: 100%;
+    height: 202px;
+    margin-top: -10px;
+}
+.menuNav .title {
+    padding-top: 50px;
+}
+.menuNav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-right: 10px;
+}
+.login_href {
+    float: right;
+    margin-right: 60px;
+    display: block;
+    margin-top: 20px;
+}
+.rui-nav {
+    width: 60%;
+    height: 80px;
+    position: absolute;
+    left: 55%;
+    top: 0%;
+    margin-top: 80px;
+}
+.rui-nav li {
+    display: inline;
+    list-style-type: none;
+    writing-mode: tb-rl;
+    text-align: center;
+    width: 46px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    border-left: 1px dotted #dddddd;
+    margin-right: 25px;
+}
+.rui-nav li:last-child {
+    border-right: 1px dotted #dddddd;
+    padding-right: 25px;
+}

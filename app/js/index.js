@@ -3,14 +3,15 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import Title from '../midleware/title.js';
-
+import Menu from '../midleware/menu.js';
+import Footer from '../midleware/footer.js';
 export default  class Index extends React.Component{
     render(){
         return (
             <div>
-                <Title />
-                <h3>Index</h3>
+                <Menu />
+                {this.props.children}
+                <Footer />
             </div>
         )
     }
