@@ -47,3 +47,46 @@
     width: 379px;
     height: 127px;
 }
+
+/*childmenu*/
+.childMenu {
+    float: left;
+}
+.left-title {
+    width: 320px;
+    height: 120px;
+}
+.childMenu h1 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-top: -60px;
+    margin-bottom: 40px;
+}
+.leftMenu {
+    width: 267px;
+    padding: 20px 10px;
+    margin-left: 25px;
+    background: #8e8e8e;
+    border-radius: 4px;
+    box-shadow: 3px 4px 2px #888888;
+}
+.leftMenu h3 {
+    text-align: center;
+    color:#fff;
+    font-size:18px;
+    line-height: 46px;
+}
+.darkline {
+    width: 267px;
+    height: 1px;
+    background: linear-gradient(to right,#8e8e8e,#a3a3a3,#8e8e8e);
+}
+.fl-fr {
+    margin-right: 35px;
+}
+.rui-panel {
+    min-height: 600px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px #888888;
+}
+

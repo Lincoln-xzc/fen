@@ -3,14 +3,23 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import Title from '../midleware/menu.js';
+import {Grid, Col, Row, Panel} from 'react-bootstrap';
 
 export default class Center extends React.Component {
     render(){
         return (
-            <div>
-                Center
-            </div>
+            <Grid>
+                <Row className="show-grid">
+                    <Col xs={12} sm={3} className="fl-fr">
+                        <ChildMenu name={'产品中心'}/>
+                    </Col>
+                    <Col xs={12} sm={8}>
+                        <Panel className="rui-panel">
+                            {this.props.children}
+                        </Panel>
+                    </Col>
+                </Row>
+            </Grid>
         )
     }
 }

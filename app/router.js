@@ -12,6 +12,11 @@ import Introduction from './js/introduction.js';
 import Message from './js/message.js';
 import Product from './js/product.js';
 import Home from './js/home.js';
+import IMessage from './js/introductionPage/message.js';
+import ICulture from './js/introductionPage/culture.js';
+import IDemeanor from './js/introductionPage/demeanor.js';
+import IHonor from './js/introductionPage/honor.js';
+
 export default class Routers extends React.Component{
     render(){
         return (
@@ -19,12 +24,34 @@ export default class Routers extends React.Component{
                 <Route path = '/' component= {Index}>
                     <IndexRoute component={Home} />
                     <Route path = '/home' component = {Home} />
-                    <Route path = '/introduction' component = {Introduction}/>
-                    <Route path = '/center' component = {Center}/>
-                    <Route path = '/cultural' component = {Cultural}/>
-                    <Route path = '/product' component = {Product}/>
-                    <Route path = '/message' component = {Message} />
-                    <Route path = '/contact' component = {Contact} />
+                    <Route path = '/introduction' component = {Introduction}>
+                        <IndexRoute component={IMessage}/>
+                        <Route path ='/introduction/message' component={IMessage}/>
+                        <Route path ='/introduction/culture' component={ICulture}/>
+                        <Route path ='/introduction/demeanor' component={IDemeanor}/>
+                        <Route path ='/introduction/honor' component={IHonor}/>
+                    </Route>
+                    <Route path = '/center' component = {Center}>
+                        <IndexRoute component={Show}/>
+                        <Route path='/center/show' component={Show}/>
+                    </Route>
+                    <Route path = '/cultural' component = {Cultural}>
+                        <IndexRoute component={News}/>
+                        <Route path='/cultural/news'component={News}/>
+                        <Route path='/cultural/Dynamic' component={Dynamic}/>
+                    </Route>
+                    <Route path = '/product' component = {Product}>
+                        <IndexRoute component={Process}/>
+                        <Route path='/product/process' component={Process}/>
+                    </Route>
+                    <Route path = '/message' component = {Message}>
+                        <IndexRoute component={Leave}/>
+                        <Route path ='/message/leave' component={Leave}/>
+                    </Route>
+                    <Route path = '/contact' component = {Contact}>
+                        <IndexRoute component={Concat}/>
+                        <Route path = '/contact/concat' component={Concat}/>
+                    </Route>
                 </Route>
             </Router>
         )

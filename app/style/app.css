@@ -27,6 +27,9 @@ body {
 .rui_carousel img {
     margin: 0 auto;
 }
+a {
+    text-underline: none;
+}
 .roof {
     background: url(/app/images/index_09.png) no-repeat;
     width: 100%;
