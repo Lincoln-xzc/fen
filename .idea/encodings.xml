@@ -9,8 +9,10 @@
     <file url="file://$PROJECT_DIR$/app/js/introduction.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/midleware/footer.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/midleware/menu.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/midleware/productList.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/midleware/topCarousel.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/router.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/style/app.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/webpack.config.js" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

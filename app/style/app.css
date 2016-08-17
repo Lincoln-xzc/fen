@@ -18,6 +18,9 @@ body {
 .rui-block {
     display: block;
 }
+.rui-center {
+    text-align: center;
+}
 .home {
     height: 100%;
 }
@@ -60,12 +63,10 @@ body {
     margin-bottom: 18px;
 }
 .newspic {
-    margin-right: 15px;
-    width: 142px;
-    height: 125px;
+
 }
 .f1 {
-    float: left;
+
 }
 .news a {
     color: #303030;
@@ -73,7 +74,12 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
-
+.news img {
+    margin-right: 15px;
+    width: 142px;
+    height: 125px;
+    float: left;
+}
 .news p {
     width: 480px;
     float: left;
@@ -82,4 +88,7 @@ body {
     line-height: 30px;
     border-top: 1px dashed #808080;
     margin-top: 18px;
+}
+.show-grid {
+    margin-top: 30px;
 }

@@ -43,3 +43,7 @@
     padding-right: 25px;
     padding-left: 45px;
 }
+.photo img {
+    width: 379px;
+    height: 127px;
+}

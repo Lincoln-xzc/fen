@@ -6,43 +6,14 @@ import {render} from 'react-dom';
 import {Carousel, Grid, Row, Col,Thumbnail} from 'react-bootstrap';
 import {Link} from 'react-router';
 import '../style/app.css';
+import '../style/home.css';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
+import TopCarouselItem from '../midleware/topCarouselItem.js';
 export default class Home extends React.Component {
     render(){
         return (
             <div className="home">
-                <div className="roof"></div>
-                <Carousel className="rui_carousel">
-                    <Carousel.Item>
-                        <img width={1420} height={700} alt="1000x700" src="/app/images/1.jpg"/>
-                        <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img width={1420} height={700} alt="1000x700" src="/app/images/2.jpg"/>
-                        <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img width={1420} height={700} alt="1000x700" src="/app/images/3.jpg"/>
-                        <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img width={1420} height={700} alt="1000x700" src="/app/images/4.jpg"/>
-                        <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>sdfsdr.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
                 <Grid>
                     <Row className="show-grid">
                         <Col xs={6} md={3} mdOffset={3}><h1>企业文化</h1></Col>
@@ -59,8 +30,93 @@ export default class Home extends React.Component {
                             <p>禾谷专用渔粉，以优质大米为材料，采用传统蒸煮工艺、现代低温室内烘干技术制造，100%不含添加剂及食用胶，禾谷渔粉美食从选料、备料清晰、切片到炒粉、煮汤、泡粉、煮粉、调口、无不专注和用心。禾谷渔粉高汤以多种草药额香料配方，加纯猪骨，严格按熬制流程和标准熬煮而成。细嫩爽滑的渔粉，香飘九巷的高汤，老少皆宜，男女通吃。“食之美不只在美味更在其神，平凡的渔粉在禾谷的精心烹饪中演绎如此精彩，必将使之传承百年、生生不息。”</p>
                         </Col>
                     </Row>
-                    <ProductList width={280} height={346}/>
-                    <TopCarousel />
+                    <Row className = "show-grid">
+                        <h1 className="rui-center">产品中心</h1>
+                        <ProductList width={280} height={346}/>
+                    </Row>
+                    <Row className = "show-grid">
+                        <h1 className="rui-center">企业动态</h1>
+                        <Col xs={12} md={6}>
+                            <img src="/app/images/index_07.jpg"/>
+                            <div className="leftdown">
+                                <button>
+                                    <Link to="/message">经营红薯米粉如何实现快速盈利</Link>
+                                </button>
+                                <p>红薯米粉投资经营有妙招，想实现快速盈利，诚信是红薯米粉品牌长久经营的根本，也是做人的一个品质体现。</p>
+                            </div>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <TopCarousel  height={125*5}>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                                <TopCarouselItem>
+                                    <img src="/app/images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
+                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
+                                </TopCarouselItem>
+                            </TopCarousel>
+                        </Col>
+                    </Row>
+                    <Row  className = "show-grid">
+                        <Col xs={12} sm={12}>
+                            <h1 className="rui-center">加盟专区</h1>
+                        </Col>
+                    </Row>
+                    <Row  className = "show-grid">
+                        <Col xs={12} sm={3}>
+                            <h1 className="tip-1"><span className="glyphicon glyphicon-list-alt tip-2"></span></h1>
+                            <h4 className="rui-block rui-center">申请资格</h4>
+                            <p>我们拥有近十年连锁经营的成功经验，在业界具有极高的品牌知名度</p>
+                        </Col>
+                        <Col xs={12} sm={3}>
+                            <h1 className="tip-1"><span className="glyphicon glyphicon-user tip-2"></span></h1>
+                            <h4 className="rui-block rui-center">申请资格</h4>
+                            <p>我们拥有近十年连锁经营的成功经验，在业界具有极高的品牌知名度</p>
+                        </Col>
+                        <Col xs={12} sm={3}>
+                            <h1 className="tip-1"><span className="glyphicon glyphicon-phone tip-2"></span></h1>
+                            <h4 className="rui-block rui-center">申请资格</h4>
+                            <p>我们拥有近十年连锁经营的成功经验，在业界具有极高的品牌知名度</p>
+                        </Col>
+                        <Col xs={12} sm={3}>
+                            <h1 className="tip-1"><span className="glyphicon glyphicon-thumbs-up tip-2"></span></h1>
+                            <h4 className="rui-block rui-center">申请资格</h4>
+                            <p>我们拥有近十年连锁经营的成功经验，在业界具有极高的品牌知名度</p>
+                        </Col>
+                    </Row>
                 </Grid>
             </div>
         )
