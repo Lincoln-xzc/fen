@@ -36,8 +36,10 @@ body {
 .product_list img {
     width: 297px;
 }
-
-/*×ÔÏÂ¶øÉÏµÄÂÖ²¥*/
+.list-unstyle {
+    list-style: none;
+}
+/*è‡ªä¸‹è€Œä¸Šçš„è½®æ’­*/
 .dyright{
     width: 638px;
     height: 557px;

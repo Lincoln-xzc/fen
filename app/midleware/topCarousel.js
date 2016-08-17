@@ -5,80 +5,87 @@ import React from 'react';
 import {render} from 'react-dom';
 
 export default  class TopCarousel extends React.Component {
+
+    //åˆå§‹åŒ–state
+    constructor(props){
+        super(props);
+        this.state ={
+            autoPlay : true,
+            time: 0,
+            c: 0
+        }
+    }
+    //åˆæ¬¡æ¸²æŸ“åŽReactæ‰§è¡Œæ­¤æ–¹æ³•
+    componentDidMount(){
+        this.setState({c:0});
+        this.timer = setInterval(function(){
+            this.state.c +=1;
+            this.setState({time:this.state.c});
+            console.log(this.state.c);
+
+        }.bind(this),40)
+    };
+
+    componentWillUpdate(m,n){
+        if(n.time ==760){
+            this.setState({time:0,c:0});
+        }
+    };
+    //å³å°†ä»ŽDOMæ ‘ç§»é™¤æ—¶æ‰§è¡Œæ­¤æ–¹æ³•
+    componentWillUnmount(){
+        clearInterval(this.timer);
+    }
     render() {
         return (
             <div className="dyright fr rel">
-                <div  className="abs">
-                    <ul>
+                <div  className="abs" style={{'top':-this.state.time +'px'}}>
+                    <ul className="list-unstyle">
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >¾­ÓªºÌ¹ÈÓæ·ÛµêÈçºÎÊµÏÖ¿ìËÙÓ¯Àû</span>
-                                <p>ºÌ¹ÈÓæ·ÛµêÍ¶×Ê¾­ÓªÓÐÃîÕÐ£¬ÏëÊµÏÖ¿ìËÙÓ¯Àû£¬³ÏÐÅÊÇºÌ¹ÈÓæ·ÛÆ·ÅÆ³¤¾Ã¾­ÓªµÄ¸ù±¾£¬Ò²ÊÇ×öÈËµÄÒ»¸öÆ·ÖÊÌåÏÖ¡£
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
                                 </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >ºÌ¹ÈÓæ·Û³¤´ºÕ¹»áÏÖ³¡</span>
-                                <p>Ïû·ÑÕßµÄÈÏ¿É£¡ ¿Í»§µÄÐÅÀµ£¡ÎÒÃÇ½«×îÓÅÖÊµÄ×î½¡¿µµÄ²úÆ·Ìá¹©¸øÏû·ÑÕß£»ÎÒÃÇ½«¸ü×¨ÒµµÄ·þÎñÌá¹©¸øÎÒÃÇµÄ¿Í»§£»Ã»´í~Õâ¾ÍÊÇÎÒÃÇÕýÔÚÅ¬Á¦×öµÄ¡£</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>ÐÞÑøÉíÐÄ£¬×ÌÒõ²¹Ñô£¬ºÌ¹ÈÓæ·Û½ÌÄúÑøÉúÖ®µÀ¡£</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>Ä¿Ç°£¬ÖÐÊ½¿ì²ÍµêÕýÔÚÖð²½È¡´úÎ÷Ê½¿ì²Íµê£¬ÖÐ²Í±Ï¾¹»¹ÊÇÖÐ¹úÈË×Ô¼ºµÄÊ³Îï£¬ÈËÃÇÒ²¸ü¼ÓÏ²»¶ÖÐ²Í¡£ÔÚ¸ß½Ú×àµÄ³ÇÊÐÉú»îÖÐ£¬Ê±¼äºÍÐ§ÂÊ¾ÍÊÇ½ðÇ®£¬¶øÖÐÊ½¿ì²ÍµêÕýÊÇÆ¾½èÊ±¼äÉÙ£¬¸ßÐ§ÂÊ»ñµÃ³É¹¦£¬ÓµÓÐÎÞÏÞÉÌ»ú!</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>2015Äê11ÔÂ14-15ÈÕÔÚ±±¾©È«¹úÅ©ÒµÕ¹ÀÀ¹Ý¾Ù°ìµÄ¡°2015µÚ27½ì±±¾©¹ú¼ÊÁ¬Ëø¼ÓÃËÕ¹ÀÀ»á¡±</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>2015Äê9ÔÂ3ÈÕ-9ÔÂ5ÈÕÔÚ³¤´ºÈ«¹ú²ÍÒûÕ¹ÀÀ¹Ý¾Ù°ìµÄ¡°2015µÚ16½ì³¤´º¹ú¼ÊÁ¬Ëø¼ÓÃËÕ¹ÀÀ»á¡±</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>ÐÞÑøÉíÐÄ£¬×ÌÒõ²¹Ñô£¬ºÌ¹ÈÓæ·Û½ÌÄúÑøÉúÖ®µÀ¡£</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                         <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>Ä¿Ç°£¬ÖÐÊ½¿ì²ÍµêÕýÔÚÖð²½È¡´úÎ÷Ê½¿ì²Íµê£¬ÖÐ²Í±Ï¾¹»¹ÊÇÖÐ¹úÈË×Ô¼ºµÄÊ³Îï£¬ÈËÃÇÒ²¸ü¼ÓÏ²»¶ÖÐ²Í¡£ÔÚ¸ß½Ú×àµÄ³ÇÊÐÉú»îÖÐ£¬Ê±¼äºÍÐ§ÂÊ¾ÍÊÇ½ðÇ®£¬¶øÖÐÊ½¿ì²ÍµêÕýÊÇÆ¾½èÊ±¼äÉÙ£¬¸ßÐ§ÂÊ»ñµÃ³É¹¦£¬ÓµÓÐÎÞÏÞÉÌ»ú!</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>2015Äê11ÔÂ14-15ÈÕÔÚ±±¾©È«¹úÅ©ÒµÕ¹ÀÀ¹Ý¾Ù°ìµÄ¡°2015µÚ27½ì±±¾©¹ú¼ÊÁ¬Ëø¼ÓÃËÕ¹ÀÀ»á¡±</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>2015Äê9ÔÂ3ÈÕ-9ÔÂ5ÈÕÔÚ³¤´ºÈ«¹ú²ÍÒûÕ¹ÀÀ¹Ý¾Ù°ìµÄ¡°2015µÚ16½ì³¤´º¹ú¼ÊÁ¬Ëø¼ÓÃËÕ¹ÀÀ»á¡±</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>ºÌ¹ÈÓæ·ÛÊÇÒÔÂÌÉ«µÄÎå¹ÈÔÓÁ¸×ö³É£¬ÓÐÐ¡Âó£¬Ð¡Ã×£¬ÜñÂó£¬¸ßÁ»£¬´óÃ××ö³É£¬°Ù·Ö°Ù²»º¬Ìí¼Ó¼Á¼°Ê³ÓÃ½º£¬´¿ÌìÈ»ÑøÉúÊ³Æ·¡£</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>ºÌ¹ÈÓæ·ÛµÄÎå¹ÈÔÓÁ¸±£Ö¤½¡¿µ¡¢ÐÂÏÊ¡¢ÑøÉúµÄÔ­ÔòÎª´ó¼Ò´òÔì½¡¿µµÄÓªÑøÃÀÊ³¡£</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/><span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>ºÌ¹ÈÓæ·ÛÖÆ×÷µÄ¸ßÌÀ·ÅµÄÊÇÉÏµÈµÄÐÂÏÊöêÓã£¬öêÓãËùº¬µÄµ°°×ÖÊÖÊÓÅ¡¢ÆëÈ«£¬ÈÝÒ×Ïû»¯ÎüÊÕ£¬ÊÇ¸ÎÉö¼²²¡¡¢ÐÄÄÔÑª¹Ü¼²²¡»¼ÕßµÄÁ¼ºÃµ°°×ÖÊÀ´Ô´¡£</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span>³Ô»õÀ´¸úÄãÁÄÁÄºÌ¹ÈÓæ·ÛÓãÌÀµÄ°ÂÃØ</span>
-                                <p>Èç½ñµÄÉç»á¾ºÕùÈÕÒæ¼¤ÁÒ£¬ºÌ¹ÈÓã·ÛÏëÒªÔÚ¼¤ÁÒµÄÊÐ³¡¾ºÕùÖÐ±£Ö¤×Ô¼ºÄÜ¹»Éú´æÏÂÈ¥£¬¾ÍÓ¦¸ÃÖªµÀÔÚ¿ªºÌ¹ÈÓã·ÛÊ±ÐèÒªÁË½âµÄÊÂÇé¡£</p>
+                            <div className="news"> <img src="/app/images/6.jpg" className="fl newspic" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/> <span >åƒè´§æ¥è·Ÿä½ èŠèŠç¦¾è°·æ¸”ç²‰é±¼æ±¤çš„å¥¥ç§˜</span>
+                                <p>ä¿®å…»èº«å¿ƒï¼Œæ»‹é˜´è¡¥é˜³ï¼Œç¦¾è°·æ¸”ç²‰æ•™æ‚¨å…»ç”Ÿä¹‹é“ã€‚
+                                </p>
                             </div>
                         </li>
                     </ul>
