@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 
 export default  class Process extends React.Component{
     render(){
-        render(
+        return(
             <div>
                 流程
             </div>

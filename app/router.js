@@ -16,6 +16,13 @@ import IMessage from './js/introductionPage/message.js';
 import ICulture from './js/introductionPage/culture.js';
 import IDemeanor from './js/introductionPage/demeanor.js';
 import IHonor from './js/introductionPage/honor.js';
+import Show from './js/centerPage/show.js';
+import Concat from './js/contactPage/cancat.js';
+import Recruitment from './js/contactPage/recruitment.js';
+import Dynamic from './js/culturalPage/dynamic.js';
+import News from './js/culturalPage/news.js';
+import Leave from './js/messagePage/leaveMessage.js';
+import Process from './js/productPage/process.js';
 
 export default class Routers extends React.Component{
     render(){

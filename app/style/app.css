@@ -27,8 +27,9 @@ body {
 .rui_carousel img {
     margin: 0 auto;
 }
-a {
-    text-underline: none;
+a:focus, a:hover,a:active{
+    text-decoration: none !important;
+    color: #d43f3a;
 }
 .roof {
     background: url(/app/images/index_09.png) no-repeat;
@@ -94,4 +95,20 @@ a {
 }
 .show-grid {
     margin-top: 30px;
+}
+.panel-default .panel-body h4{
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+    color: #d43f3a;
+}
+.rui-text p img {
+    width: 501px;
+    height: 467px;
+}
+.rui-text p {
+    color: #8e8e8e;
+}
+.honor {
+    width: 540px;
+    height: 1472px;
 }

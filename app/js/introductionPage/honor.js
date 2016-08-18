@@ -8,7 +8,12 @@ export default  class Honor extends React.Component {
     render(){
         return (
             <div>
-                <h3>企业荣誉</h3>
+                <h4>企业荣誉</h4>
+                <div className="rui-text">
+                    <div className="rui-center">
+                        <img src="/app/images/8.jpg" className="honor"/>
+                    </div>
+                </div>
             </div>
         )
     }

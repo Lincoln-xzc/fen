@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 
 export default  class Concat extends React.Component{
     render(){
-        render(
+        return(
             <div>
                 联系我们
             </div>

@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 
 export default  class Dynamic extends React.Component{
     render(){
-        render(
+        return(
             <div>
                 行业动态
             </div>

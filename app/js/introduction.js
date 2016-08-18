@@ -9,11 +9,36 @@ import ChildMenu from '../midleware/childMenu.js';
 
 export default  class Introduction extends React.Component{
     render(){
+        const menuTree = {
+            'title':'企业实力',
+            'menu':[
+                {
+                    id: 1,
+                    url:'/introduction/message',
+                    name:'企业简介'
+                },
+                {
+                    id: 2,
+                    url:'/introduction/honor',
+                    name:'企业荣誉'
+                },
+                {
+                    id:3,
+                    url:'/introduction/culture',
+                    name: '企业文化'
+                },
+                {
+                    id:4,
+                    url:'/introduction/demeanor',
+                    name:'员工风采'
+                }
+            ]
+        };
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col xs={12} sm={3} className="fl-fr">
-                        <ChildMenu name={'企业实力'}/>
+                        <ChildMenu menuTree = {menuTree}/>
                     </Col>
                     <Col xs={12} sm={8}>
                         <Panel className="rui-panel">

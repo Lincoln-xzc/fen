@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 
 export default  class Leave extends React.Component{
     render(){
-        render(
+        return(
             <div>
                 客户留言
             </div>

@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 
 export default  class News extends React.Component{
     render(){
-        render(
+        return(
             <div>
                 最新新闻
             </div>

@@ -8,7 +8,10 @@ export default  class IntroductionMessage extends React.Component {
     render(){
         return (
             <div>
-                <h3>员工风采</h3>
+                <h4>员工风采</h4>
+                <div className="rui-text">
+                    <h5 className="rui-center">资料更新中，敬请期待</h5>
+                </div>
             </div>
         )
     }
