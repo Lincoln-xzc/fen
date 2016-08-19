@@ -27,9 +27,12 @@ body {
 .rui_carousel img {
     margin: 0 auto;
 }
-a:focus, a:hover,a:active{
+.rui-list a{
+    color:#a2a2a2;
+}
+.container .childMenu a:focus, a:hover,a:active{
     text-decoration: none !important;
-    color: #d43f3a;
+    color: #d43f3a !important;
 }
 .roof {
     background: url(/app/images/index_09.png) no-repeat;
@@ -111,4 +114,28 @@ a:focus, a:hover,a:active{
 .honor {
     width: 540px;
     height: 1472px;
+}
+.show .product_list {
+    margin-left: 40px;
+}
+.show .product_list a {
+    margin-right: 10px;
+}
+.rui-list li {
+    border-bottom: 1px dotted #a2a2a2;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.rui-list li:first-child {
+    margin-top: 20px;
+}
+.detail .rui-center {
+    border-bottom: 1px dotted #dddddd;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.detail .rui-center h3 {
+    font-weight: bold;
 }

@@ -15,11 +15,6 @@ export default class Contact extends React.Component {
                     id: 1,
                     url:'/contact/cancat',
                     name:'联系我们'
-                },
-                {
-                    id: 2,
-                    url:'/contact/cancat',
-                    name:'企业荣誉'
                 }
             ]
         };

@@ -23,6 +23,10 @@ import Dynamic from './js/culturalPage/dynamic.js';
 import News from './js/culturalPage/news.js';
 import Leave from './js/messagePage/leaveMessage.js';
 import Process from './js/productPage/process.js';
+import Detail from './js/culturalPage/detail.js';
+import EndIndex from './js/ended/index.js';
+import Login from './js/ended/login.js';
+import Register from './js/ended/register.js';
 
 export default class Routers extends React.Component{
     render(){
@@ -45,7 +49,9 @@ export default class Routers extends React.Component{
                     <Route path = '/cultural' component = {Cultural}>
                         <IndexRoute component={News}/>
                         <Route path='/cultural/news'component={News}/>
-                        <Route path='/cultural/Dynamic' component={Dynamic}/>
+                        <Route path='/cultural/dynamic' component={Dynamic}/>
+                        <Route path='/cultural/news/detail' component={Detail}/>
+                        <Route path='/cultural/dynamic/detail' component={Detail} />
                     </Route>
                     <Route path = '/product' component = {Product}>
                         <IndexRoute component={Process}/>
@@ -59,6 +65,11 @@ export default class Routers extends React.Component{
                         <IndexRoute component={Concat}/>
                         <Route path = '/contact/concat' component={Concat}/>
                     </Route>
+                </Route>
+                <Route path="/end" component={EndIndex}>
+                    <IndexRoute component={Login}/>
+                    <Route path='/end/login' component={Login}/>
+                    <Route path="/end/register" component={Register}/>
                 </Route>
             </Router>
         )

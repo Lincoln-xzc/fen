@@ -8,7 +8,12 @@ export default  class Process extends React.Component{
     render(){
         return(
             <div>
-                流程
+                <h4>加工流程</h4>
+                <div className="process rui-text">
+                    <p className="rui-center">
+                        <img src="/app/images/7.jpg" />
+                    </p>
+                </div>
             </div>
         )
     }

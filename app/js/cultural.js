@@ -9,7 +9,7 @@ import ChildMenu from '../midleware/childMenu.js';
 export default class Cultural extends React.Component {
     render(){
         const menuTree = {
-            'title':'企业实力',
+            'title':'企业动态',
             'menu':[
                 {
                     id: 1,
