@@ -23,19 +23,19 @@ export default  class Show extends React.Component{
         return(
             <div>
                 <h4>产品展示</h4>
-                <div className="rui-center">
+                <div className="show">
                     <ProductList width={200} height={258}/>
+                </div>
+                <div className="rui-center">
                     <Pagination
                         prev
                         next
-                        ellipsis
                         boundaryLinks
-                        items={20}
+                        items={5}
                         maxButtons={5}
                         activePage={this.state.activePage}
                         onSelect={this.handleSelect}/>
                 </div>
-
             </div>
         )
     }
