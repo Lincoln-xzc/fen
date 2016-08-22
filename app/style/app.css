@@ -99,6 +99,9 @@ body {
 .show-grid {
     margin-top: 30px;
 }
+.panel-default .panel-body {
+    min-height: 500px;
+}
 .panel-default .panel-body h4{
     border-bottom: 1px solid #dddddd;
     padding-bottom: 10px;
@@ -138,4 +141,18 @@ body {
 }
 .detail .rui-center h3 {
     font-weight: bold;
+}
+.form-group {
+    padding-bottom: 35px;
+}
+.form-control {
+    width: auto;
+}
+.login-img {
+    width:348px;
+    height: 369px;
+    border: 2px solid #8a6d3b;
+}
+.rui-right-2 {
+    margin-right: 20px;
 }

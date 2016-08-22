@@ -27,6 +27,11 @@ import Detail from './js/culturalPage/detail.js';
 import EndIndex from './js/ended/index.js';
 import Login from './js/ended/login.js';
 import Register from './js/ended/register.js';
+import EHome from './js/ended/home.js';
+import Images  from './js/ended/home/images.js';
+import Upload from './js/ended/home/upload.js';
+import Fonts from './js/ended/home/fonts.js';
+import Describe from './js/ended/home/describe.js';
 
 export default class Routers extends React.Component{
     render(){
@@ -70,6 +75,13 @@ export default class Routers extends React.Component{
                     <IndexRoute component={Login}/>
                     <Route path='/end/login' component={Login}/>
                     <Route path="/end/register" component={Register}/>
+                    <Route path="/end/home" component={EHome}>
+                        <IndexRoute component={Images}/>
+                        <Route path='/end/home/images' component={Images}/>
+                        <Route path='/end/home/upload' component={Upload}/>
+                        <Route path='/end/home/fonts' component={Fonts}/>
+                        <Route path='/end/home/describe' component={Describe}/>
+                    </Route>
                 </Route>
             </Router>
         )

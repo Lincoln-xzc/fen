@@ -4,7 +4,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link } from 'react-router';
-import {Grid} from 'react-bootstrap';
+import {Grid,Panel} from 'react-bootstrap';
+import Footer from '../../midleware/footer.js';
+
 export default class Index extends React.Component{
     render(){
         return(
@@ -15,7 +17,7 @@ export default class Index extends React.Component{
                             <img src='/app/images/logo.jpg'/>
                         </Link>
                     </div>
-                    <div className="rui-right">
+                    <div className="rui-right" style={{marginTop:-100+'px'}}>
                         <Link to='/home'>网站首页</Link>
                     </div>
                 </div>
@@ -23,6 +25,7 @@ export default class Index extends React.Component{
                 <Grid>
                     {this.props.children}
                 </Grid>
+                <Footer/>
             </div>
         )
     }

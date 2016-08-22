@@ -3,13 +3,57 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
+import {Row,Col,Form,FormControl,FormGroup,ControlLabel,Image,Panel} from 'react-bootstrap';
+import {Link} from 'react-router';
 
 export default class Login  extends React.Component{
     render(){
         return(
-            <div>
-                登录
-            </div>
+            <Panel>
+                <Row className="show-grid">
+                    <Col xs={12} sm={7} style={{paddingLeft:70+'px'}}>
+                        <div className="title">
+                            <h3>登录账户</h3>
+                        </div>
+                        <Form>
+                            <FormGroup>
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    用户名：
+                                </Col>
+                                <Col sm={10}>
+                                    <FormControl type="text" placeholder="请输入用户名" size="30"/>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    密码：
+                                </Col>
+                                <Col sm={10}>
+                                    <FormControl type="password" placeholder="请输入密码" size="30"/>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    验证码：
+                                </Col>
+                                <Col sm={4}>
+                                    <FormControl type="text" placeholder="请输入验证码" size="15"/>
+                                </Col>
+                                <Col sm={4}>
+                                    <Image src="" alt="photo"/>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup className="rui-center">
+                                <button type="submit" className="btn btn-danger btn-md rui-right-2">登录</button>
+                                <Link className="btn btn-primary btn-md"  to='/end/register'>注册</Link>
+                            </FormGroup>
+                        </Form>
+                    </Col>
+                    <Col xs={12} sm={5}>
+                        <Image src="/app/images/5.jpg" rounded className="login-img"/>
+                    </Col>
+                </Row>
+            </Panel>
         )
     }
 }
