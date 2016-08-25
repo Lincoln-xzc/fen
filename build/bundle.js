@@ -203,17 +203,45 @@
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
 	        return setTimeout(fun, 0);
-	    } else {
-	        return cachedSetTimeout.call(null, fun, 0);
 	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
 	}
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
-	        clearTimeout(marker);
-	    } else {
-	        cachedClearTimeout.call(null, marker);
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
 	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
 	}
 	var queue = [];
 	var draining = false;
@@ -27623,7 +27651,7 @@
 
 
 	// module
-	exports.push([module.id, ".menuNav {\r\n    background-image: url(\"/app/images/index_01.jpg\");\r\n    width: 100%;\r\n    height: 202px;\r\n    margin-top: -10px;\r\n}\r\n.menuNav .title {\r\n    padding-top: 50px;\r\n}\r\n.menuNav a {\r\n    text-decoration: none;\r\n    color: #ffffff;\r\n    margin-right: 10px;\r\n}\r\n.login_href {\r\n    float: right;\r\n    margin-right: 60px;\r\n    display: block;\r\n    margin-top: 20px;\r\n}\r\n.rui-nav {\r\n    width: 60%;\r\n    height: 80px;\r\n    position: absolute;\r\n    left: 55%;\r\n    top: 0%;\r\n    margin-top: 80px;\r\n}\r\n.rui-nav li {\r\n    display: inline;\r\n    list-style-type: none;\r\n    writing-mode: tb-rl;\r\n    text-align: center;\r\n    width: 46px;\r\n    letter-spacing: 2px;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    border-left: 1px dotted #dddddd;\r\n    margin-right: 25px;\r\n}\r\n.rui-nav li:last-child {\r\n    border-right: 1px dotted #dddddd;\r\n    padding-right: 25px;\r\n    padding-left: 45px;\r\n}\r\n.photo img {\r\n    width: 379px;\r\n    height: 127px;\r\n}\r\n\r\n/*childmenu*/\r\n.childMenu {\r\n    float: left;\r\n}\r\n.left-title {\r\n    width: 320px;\r\n    height: 120px;\r\n}\r\n.childMenu h1 {\r\n    color: #ffffff;\r\n    font-weight: 700;\r\n    margin-top: -60px;\r\n    margin-bottom: 40px;\r\n}\r\n.leftMenu {\r\n    width: 267px;\r\n    padding: 20px 10px;\r\n    margin-left: 25px;\r\n    background: #8e8e8e;\r\n    border-radius: 4px;\r\n    box-shadow: 3px 4px 2px #888888;\r\n}\r\n.leftMenu h3 {\r\n    text-align: center;\r\n    color:#fff;\r\n    font-size:18px;\r\n    line-height: 46px;\r\n}\r\n.darkline {\r\n    width: 249px;\r\n    height: 1px;\r\n    background: linear-gradient(to right,#8e8e8e,#a3a3a3,#8e8e8e);\r\n}\r\n.fl-fr {\r\n    margin-right: 35px;\r\n}\r\n.rui-panel {\r\n    min-height: 600px;\r\n    border-radius: 3px;\r\n    box-shadow: 1px 1px 2px #888888;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, ".menuNav {\n    background-image: url(\"/app/images/index_01.jpg\");\n    width: 100%;\n    height: 202px;\n    margin-top: -10px;\n}\n.menuNav .title {\n    padding-top: 50px;\n}\n.menuNav a {\n    text-decoration: none;\n    color: #ffffff;\n    margin-right: 10px;\n}\n.login_href {\n    float: right;\n    margin-right: 60px;\n    display: block;\n    margin-top: 20px;\n}\n.rui-nav {\n    width: 60%;\n    height: 80px;\n    position: absolute;\n    left: 55%;\n    top: 0%;\n    margin-top: 80px;\n}\n.rui-nav li {\n    display: inline;\n    list-style-type: none;\n    writing-mode: tb-rl;\n    text-align: center;\n    width: 46px;\n    letter-spacing: 2px;\n    font-size: 16px;\n    font-weight: 600;\n    border-left: 1px dotted #dddddd;\n    margin-right: 25px;\n}\n.rui-nav li:last-child {\n    border-right: 1px dotted #dddddd;\n    padding-right: 25px;\n    padding-left: 45px;\n}\n.photo img {\n    width: 379px;\n    height: 127px;\n}\n\n/*childmenu*/\n.childMenu {\n    float: left;\n}\n.left-title {\n    width: 320px;\n    height: 120px;\n}\n.childMenu h1 {\n    color: #ffffff;\n    font-weight: 700;\n    margin-top: -60px;\n    margin-bottom: 40px;\n}\n.leftMenu {\n    width: 267px;\n    padding: 20px 10px;\n    margin-left: 25px;\n    background: #8e8e8e;\n    border-radius: 4px;\n    box-shadow: 3px 4px 2px #888888;\n}\n.leftMenu h3 {\n    text-align: center;\n    color:#fff;\n    font-size:18px;\n    line-height: 46px;\n}\n.darkline {\n    width: 249px;\n    height: 1px;\n    background: linear-gradient(to right,#8e8e8e,#a3a3a3,#8e8e8e);\n}\n.fl-fr {\n    margin-right: 35px;\n}\n.rui-panel {\n    min-height: 600px;\n    border-radius: 3px;\n    box-shadow: 1px 1px 2px #888888;\n}\n\n", ""]);
 
 	// exports
 
@@ -28031,7 +28059,7 @@
 
 
 	// module
-	exports.push([module.id, ".rui_footer h4{\r\n   text-align: center;\r\n}\r\n.rui_footer {\r\n   margin-bottom: 0px;\r\n   margin-top: 30px;\r\n}", ""]);
+	exports.push([module.id, ".rui_footer h4{\n   text-align: center;\n}\n.rui_footer {\n   margin-bottom: 0px;\n   margin-top: 30px;\n}", ""]);
 
 	// exports
 
@@ -46855,7 +46883,7 @@
 
 	        //会在组件render之前执行，并且永远都只执行一次。
 	        /*componentWillMount(){
-	          }*/
+	         }*/
 	        //这个方法会在组件加载完毕之后立即执行。在这个时候之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
 	        /*如果你想和其他JavaScript框架一起使用，可以在这个方法中执行setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)。*/
 	        /* componentDidMount(){
@@ -46864,14 +46892,14 @@
 
 	        /*组件更新: */
 	        /*componentWillUpdate(m,n){
-	          }*/
+	         }*/
 	        /*在组件完成更新后立即执行。在初始化时不会被执行。一般会在组件完成更新后被使用。*/
 	        /*componentDidUpdate(m,n){
-	          }*/
+	         }*/
 
 	        /*在组件从DOM unmount后立即执行，主要用来执行一些必要的清理任务*/
 	        /*componentWillUnmount(){
-	          }*/
+	         }*/
 
 	        value: function render() {
 	            var rows = [];
@@ -47842,7 +47870,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\r\n    margin: 0;\r\n    font-size: 16px;\r\n    font-family: \"Times News Roman\", Times, serif;\r\n    overflow-x: hidden !important;\r\n}\r\n.rui-row {\r\n    margin-left: -15px;\r\n    margin-right: -15px;\r\n    display: block;\r\n}\r\n.rui-left {\r\n    float: left;\r\n}\r\n.rui-right {\r\n    float: right;\r\n}\r\n.rui-block {\r\n    display: block;\r\n}\r\n.rui-center {\r\n    text-align: center;\r\n}\r\n.home {\r\n    height: 100%;\r\n}\r\n.rui_carousel img {\r\n    margin: 0 auto;\r\n}\r\n.rui-list a{\r\n    color:#a2a2a2;\r\n}\r\n.container .childMenu a:focus, a:hover,a:active{\r\n    text-decoration: none !important;\r\n    color: #d43f3a !important;\r\n}\r\n.roof {\r\n    background: url(/app/images/index_09.png) no-repeat;\r\n    width: 100%;\r\n    height: 32px;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n\r\n.product_list img {\r\n    width: 297px;\r\n}\r\n.list-unstyle {\r\n    list-style: none;\r\n}\r\n/*自下而上的轮播*/\r\n.dyright{\r\n    width: 638px;\r\n    height: 557px;\r\n    overflow: hidden;\r\n}\r\n.rel {\r\n    position: relative;\r\n}\r\n.fr {\r\n    float: right;\r\n}\r\n.abs {\r\n    position: absolute;\r\n}\r\n.news {\r\n    width: 638px;\r\n    height: 127px;\r\n    margin-bottom: 18px;\r\n}\r\n.newspic {\r\n\r\n}\r\n.f1 {\r\n\r\n}\r\n.news a {\r\n    color: #303030;\r\n    font-size: 18px;\r\n    font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n    font-weight: bold;\r\n}\r\n.news img {\r\n    margin-right: 15px;\r\n    width: 142px;\r\n    height: 125px;\r\n    float: left;\r\n}\r\n.news p {\r\n    width: 480px;\r\n    float: left;\r\n    font-size: 14px;\r\n    color: #6d6d6d;\r\n    line-height: 30px;\r\n    border-top: 1px dashed #808080;\r\n    margin-top: 18px;\r\n}\r\n.show-grid {\r\n    margin-top: 30px;\r\n}\r\n.panel-default .panel-body {\r\n    min-height: 500px;\r\n}\r\n.panel-default .panel-body h4{\r\n    border-bottom: 1px solid #dddddd;\r\n    padding-bottom: 10px;\r\n    color: #d43f3a;\r\n}\r\n.rui-text p img {\r\n    width: 501px;\r\n    height: 467px;\r\n}\r\n.rui-text p {\r\n    color: #8e8e8e;\r\n}\r\n.honor {\r\n    width: 540px;\r\n    height: 1472px;\r\n}\r\n.show .product_list {\r\n    margin-left: 40px;\r\n}\r\n.show .product_list a {\r\n    margin-right: 10px;\r\n}\r\n.rui-list li {\r\n    border-bottom: 1px dotted #a2a2a2;\r\n    padding-bottom: 10px;\r\n    margin-bottom: 10px;\r\n    margin-top: 20px;\r\n    font-size: 14px;\r\n}\r\n.rui-list li:first-child {\r\n    margin-top: 20px;\r\n}\r\n.detail .rui-center {\r\n    border-bottom: 1px dotted #dddddd;\r\n    margin-bottom: 40px;\r\n    margin-top: 20px;\r\n}\r\n.detail .rui-center h3 {\r\n    font-weight: bold;\r\n}\r\n.form-group {\r\n    padding-bottom: 35px;\r\n}\r\n.form-control {\r\n    width: auto;\r\n}\r\n.login-img {\r\n    width:348px;\r\n    height: 369px;\r\n    border: 2px solid #8a6d3b;\r\n}\r\n.rui-right-2 {\r\n    margin-right: 20px;\r\n}", ""]);
+	exports.push([module.id, "body {\n    margin: 0;\n    font-size: 16px;\n    font-family: \"Times News Roman\", Times, serif;\n    overflow-x: hidden !important;\n}\n.rui-row {\n    margin-left: -15px;\n    margin-right: -15px;\n    display: block;\n}\n.rui-left {\n    float: left;\n}\n.rui-right {\n    float: right;\n}\n.rui-block {\n    display: block;\n}\n.rui-center {\n    text-align: center;\n}\n.home {\n    height: 100%;\n}\n.rui_carousel img {\n    margin: 0 auto;\n}\n.rui-list a{\n    color:#a2a2a2;\n}\n.container .childMenu a:focus, a:hover,a:active{\n    text-decoration: none !important;\n    color: #d43f3a !important;\n}\n.roof {\n    background: url(/app/images/index_09.png) no-repeat;\n    width: 100%;\n    height: 32px;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n}\n\n.product_list img {\n    width: 297px;\n}\n.list-unstyle {\n    list-style: none;\n}\n/*自下而上的轮播*/\n.dyright{\n    width: 638px;\n    height: 557px;\n    overflow: hidden;\n}\n.rel {\n    position: relative;\n}\n.fr {\n    float: right;\n}\n.abs {\n    position: absolute;\n}\n.news {\n    width: 638px;\n    height: 127px;\n    margin-bottom: 18px;\n}\n.newspic {\n\n}\n.f1 {\n\n}\n.news a {\n    color: #303030;\n    font-size: 18px;\n    font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n    font-weight: bold;\n}\n.news img {\n    margin-right: 15px;\n    width: 142px;\n    height: 125px;\n    float: left;\n}\n.news p {\n    width: 480px;\n    float: left;\n    font-size: 14px;\n    color: #6d6d6d;\n    line-height: 30px;\n    border-top: 1px dashed #808080;\n    margin-top: 18px;\n}\n.show-grid {\n    margin-top: 30px;\n}\n.panel-default .panel-body {\n    min-height: 500px;\n}\n.panel-default .panel-body h4{\n    border-bottom: 1px solid #dddddd;\n    padding-bottom: 10px;\n    color: #d43f3a;\n}\n.rui-text p img {\n    width: 501px;\n    height: 467px;\n}\n.rui-text p {\n    color: #8e8e8e;\n}\n.honor {\n    width: 540px;\n    height: 1472px;\n}\n.show .product_list {\n    margin-left: 40px;\n}\n.show .product_list a {\n    margin-right: 10px;\n}\n.rui-list li {\n    border-bottom: 1px dotted #a2a2a2;\n    padding-bottom: 10px;\n    margin-bottom: 10px;\n    margin-top: 20px;\n    font-size: 14px;\n}\n.rui-list li:first-child {\n    margin-top: 20px;\n}\n.detail .rui-center {\n    border-bottom: 1px dotted #dddddd;\n    margin-bottom: 40px;\n    margin-top: 20px;\n}\n.detail .rui-center h3 {\n    font-weight: bold;\n}\n.form-group {\n    padding-bottom: 35px;\n}\n.form-control {\n    width: auto;\n}\n.login-img {\n    width:348px;\n    height: 369px;\n    border: 2px solid #8a6d3b;\n}\n.rui-right-2 {\n    margin-right: 20px;\n}", ""]);
 
 	// exports
 
@@ -47882,7 +47910,7 @@
 
 
 	// module
-	exports.push([module.id, ".leftdown {\r\n    background: #a2a2a2;\r\n    width: 531px;\r\n    height: 210px;\r\n    padding: 13px 21px;\r\n    margin-top: 10px;\r\n}\r\n.leftdown button {\r\n    width: 493px;\r\n    height: 47px;\r\n    border: 2px solid #dddddd;\r\n    font-size: 24px;\r\n    color: #ffffff;\r\n    background-color: #a2a2a2;\r\n}\r\n.leftdown button a {\r\n    color: #ffffff;\r\n}\r\n.leftdown p {\r\n    line-height: 28px;\r\n    font-size: 14px;\r\n    color:#ebebeb;\r\n    text-align: center;\r\n}\r\n.tip-1 {\r\n    background-color: #eae8ea;\r\n    width: 100px;\r\n    height: 100px;\r\n    border-radius: 60px;\r\n    margin-left: 80px;\r\n}\r\n.tip-2 {\r\n    background-color: #f9f5f8;\r\n    width: 80px;\r\n    height: 80px;\r\n    border-radius: 40px;\r\n    margin-left: 10px;\r\n    margin-top: 10px;\r\n    padding-left: 15px;\r\n    padding-top: 15px;\r\n    font-size: 50px;\r\n}", ""]);
+	exports.push([module.id, ".leftdown {\n    background: #a2a2a2;\n    width: 531px;\n    height: 210px;\n    padding: 13px 21px;\n    margin-top: 10px;\n}\n.leftdown button {\n    width: 493px;\n    height: 47px;\n    border: 2px solid #dddddd;\n    font-size: 24px;\n    color: #ffffff;\n    background-color: #a2a2a2;\n}\n.leftdown button a {\n    color: #ffffff;\n}\n.leftdown p {\n    line-height: 28px;\n    font-size: 14px;\n    color:#ebebeb;\n    text-align: center;\n}\n.tip-1 {\n    background-color: #eae8ea;\n    width: 100px;\n    height: 100px;\n    border-radius: 60px;\n    margin-left: 80px;\n}\n.tip-2 {\n    background-color: #f9f5f8;\n    width: 80px;\n    height: 80px;\n    border-radius: 40px;\n    margin-left: 10px;\n    margin-top: 10px;\n    padding-left: 15px;\n    padding-top: 15px;\n    font-size: 50px;\n}", ""]);
 
 	// exports
 
@@ -49385,13 +49413,39 @@
 	var Login = function (_React$Component) {
 	    _inherits(Login, _React$Component);
 
-	    function Login() {
+	    function Login(props) {
 	        _classCallCheck(this, Login);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Login).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
+
+	        _this.state = {
+	            nameErr: '',
+	            name: '',
+	            password: '',
+	            capital: ''
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Login, [{
+	        key: 'handleNameChange',
+	        value: function handleNameChange(e) {
+	            var value = e.target.value;
+	            if (value.length <= 0) {
+	                this.setState({ nameErr: '用户名不能为空' });
+	            } else {
+	                this.setState({ nameErr: '' });
+	                this.setState({ name: value });
+	                console.log(this.state.name);
+	            }
+	        }
+	    }, {
+	        key: 'login',
+	        value: function login() {
+	            _reactRouter.history.replaceState(null, '/end/home');
+	            console.log('login');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -49426,7 +49480,7 @@
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.Col,
 	                                    { sm: 10 },
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '请输入用户名', size: '30' })
+	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '请输入用户名', onChange: this.handleNameChange, size: '30' })
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -49440,7 +49494,7 @@
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.Col,
 	                                    { sm: 10 },
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'password', placeholder: '请输入密码', size: '30' })
+	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'password', placeholder: '请输入密码', onChange: this.handlePWChange, size: '30' })
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -49454,7 +49508,7 @@
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.Col,
 	                                    { sm: 4 },
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '请输入验证码', size: '15' })
+	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '请输入验证码', onChange: this.handleCpChange, size: '15' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    _reactBootstrap.Col,
@@ -49467,7 +49521,7 @@
 	                                { className: 'rui-center' },
 	                                _react2.default.createElement(
 	                                    'button',
-	                                    { type: 'submit', className: 'btn btn-danger btn-md rui-right-2' },
+	                                    { type: 'submit', className: 'btn btn-danger btn-md rui-right-2', onClick: this.login },
 	                                    '登录'
 	                                ),
 	                                _react2.default.createElement(
