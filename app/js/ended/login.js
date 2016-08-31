@@ -5,35 +5,70 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Row,Col,Form,FormControl,FormGroup,ControlLabel,Image,Panel} from 'react-bootstrap';
 import {Link, history} from 'react-router';
+import 'whatwg-fetch';
 
 export default class Login  extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            nameErr:'',
+            nameError:'',
+            pwError: '',
+            capError: '',
             name:'',
             password:'',
             capital: ''
-        }
+        };
+
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handlePWChange = this.handlePWChange.bind(this);
+        this.handleCpChange = this.handleCpChange.bind(this);
+        this.login = this.login.bind(this);
     }
 
-    handleNameChange (e) {
-        var value = e.target.value;
-        if(value.length <=0){
-            this.setState({nameErr:'用户名不能为空'});
+    handleNameChange(e){
+        let value = e.target.value;
+        if(value == ''){
+            this.setState({nameError: ''})
         } else {
-            this.setState({nameErr:''});
-            this.setState({name:value});
-            console.log(this.state.name);
-
+            this.setState({name : value});
         }
-
     }
 
+    handlePWChange(e){
+        let value = e.target.value;
+        if(value == '')
+            this.setState({pwError: ''});
+        else
+            this.setState({password: value});
+    }
+
+
+    handleCpChange(e){
+        let value = e.target.value;
+        if(value == '')
+            this.setState({capError:''});
+        else
+            this.setState({capital: value});
+    }
 
     login(){
-        history.replaceState(null,'/end/home');
-        console.log('login')
+        console.log(this.state.name,this.state.password,this.state.capital);
+        fetch('http://localhost:3000/api/user',{
+            method: 'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.name,
+                password: this.state.password
+            })
+        }).then(function(response){
+            console.log(response);
+            /*history.replaceState(null,'/end/home');*/
+        })
+
+
     }
 
     render(){
@@ -50,7 +85,7 @@ export default class Login  extends React.Component{
                                     用户名：
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="请输入用户名"  onChange={this.handleNameChange} size="30"/>
+                                    <FormControl type="text" placeholder="请输入用户名"  name="name" onChange={this.handleNameChange} size="30"/>
                                 </Col>
                             </FormGroup>
                             <FormGroup>
@@ -73,7 +108,7 @@ export default class Login  extends React.Component{
                                 </Col>
                             </FormGroup>
                             <FormGroup className="rui-center">
-                                <button type="submit" className="btn btn-danger btn-md rui-right-2" onClick={this.login}>登录</button>
+                                <button className="btn btn-danger btn-md rui-right-2" onClick={this.login}>登录</button>
                                 <Link className="btn btn-primary btn-md"  to='/end/register'>注册</Link>
                             </FormGroup>
                         </Form>

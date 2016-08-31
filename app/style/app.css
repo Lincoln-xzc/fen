@@ -35,7 +35,7 @@ body {
     color: #d43f3a !important;
 }
 .roof {
-    background: url(/app/images/index_09.png) no-repeat;
+    background: url("../images/index_09.png") no-repeat;
     width: 100%;
     height: 32px;
     z-index: 1000;

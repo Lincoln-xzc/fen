@@ -6,6 +6,15 @@ import {render} from 'react-dom';
 import {Row,Col,Form, FormControl,ControlLabel,FormGroup,Image,Panel} from 'react-bootstrap';
 
 export default class Register extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            'username':'',
+            'password':'',
+            'caption' :'1234'
+        }
+    }
+    
     render(){
         return(
             <Panel>

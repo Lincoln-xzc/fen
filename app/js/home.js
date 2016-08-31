@@ -5,11 +5,11 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Carousel, Grid, Row, Col,Thumbnail} from 'react-bootstrap';
 import {Link} from 'react-router';
-import '../style/app.css';
-import '../style/home.css';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
 import TopCarouselItem from '../midleware/topCarouselItem.js';
+
+
 export default class Home extends React.Component {
     render(){
         return (
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
                     <Row className = "show-grid">
                         <Col xs={6} md={6}>
                             <Link to="/cultural">
-                                <Thumbnail alt="171x180" src="/app/images/5.jpg" />
+                                <Thumbnail alt="171x180" src="../images/logo.jpg" />
                             </Link>
                         </Col>
                         <Col xs={6} md={6}>

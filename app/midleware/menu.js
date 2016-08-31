@@ -4,7 +4,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link } from 'react-router';
-import  '../style/menu.css';
+import logo from '../images/logo.jpg';
+
 export default  class Menu extends React.Component{
     render(){
         return (
@@ -15,7 +16,7 @@ export default  class Menu extends React.Component{
                 </div>
                 <div className = 'title'>
                     <Link to = '/' className = 'photo'>
-                        <img src='/app/images/logo.jpg'/>
+                        <img src='../images/logo.jpg'/>
                     </Link>
                     <ul className = "rui-nav rui-bar">
                         <li><Link to='/'>首页</Link></li>
