@@ -4,6 +4,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
+import '../style/app.css';
+
 export default  class TopCarousel extends React.Component {
 
     //初始化state

@@ -8,9 +8,6 @@ import {hashHistory} from 'react-router';
 import './style/app.css';
 import './style/bootstrap-theme.min.css';
 import './style/bootstrap.min.css';
-import './style/home.css';
-import './style/footer.css';
-import './style/menu.css';
 
 render(
     <Routers history = {hashHistory}/>

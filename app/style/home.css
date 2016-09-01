@@ -22,6 +22,13 @@
     color:#ebebeb;
     text-align: center;
 }
+.left-img {
+    width: 530px;
+    height: 338px;
+}
+.product_list{
+    margin-left: 15px;
+}
 .tip-1 {
     background-color: #eae8ea;
     width: 100px;

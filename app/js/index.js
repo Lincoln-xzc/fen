@@ -21,7 +21,7 @@ export default  class Index extends React.Component{
                     <Carousel.Item>
                         <img width={1420} height={700} alt="1000x700" src="../images/1.jpg"/>
                         <Carousel.Caption>
-                            <h3>First slide label{Carousel1}</h3>
+                            <h3>First slide label</h3>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                         </Carousel.Caption>
                     </Carousel.Item>

@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
+import '../style/app.css';
 
 export default class TopCarouselItem extends React.Component{
     render(){

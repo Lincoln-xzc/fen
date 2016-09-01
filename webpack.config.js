@@ -14,7 +14,8 @@ module.exports = {
         path.resolve(__dirname, 'app/app.js')],
     output:{
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
 
@@ -36,8 +37,9 @@ module.exports = {
                 loader:'style!css'
             },
             {
-                test: /\.(png|jpg|svg|jpeg|gif|ico)$/i,
-                loader: 'url?limit=100000&&name=images/[name].[ext]'
+                test: /\.(png|jpg|jpeg|gif)$/i,
+                loader: 'url-loader?limit=10000&name=images/[name].[ext]',
+
             },
             {
                 test: /\.(eot|ttf|woff|woff(2))$/i,

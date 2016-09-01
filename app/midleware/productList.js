@@ -11,28 +11,28 @@ export default  class ProductList extends React.Component{
         return(
             <div className="product_list">
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
                 <Link to='/product'>
-                    <Image src="/app/images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
+                    <Image src="../images/6.jpg" style={{'width':this.props.width ,'height':this.props.height}} thumbnail/>
                 </Link>
             </div>
         )
