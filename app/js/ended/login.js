@@ -114,7 +114,7 @@ export default class Login  extends React.Component{
                         </Form>
                     </Col>
                     <Col xs={12} sm={5}>
-                        <Image src="/app/images/5.jpg" rounded className="login-img"/>
+                        <Image src={require('../../images/5.jpg')} rounded className="login-img"/>
                     </Col>
                 </Row>
             </Panel>

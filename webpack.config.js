@@ -6,45 +6,76 @@
 var path = require('path');
 var webpack = require('webpack');
 
+//编译后自动打开浏览器
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+
+//单独样式文件
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
+    devServer: {
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        progress: true,
+        contentBase: '/.app',
+        host: '0.0.0.0',
+        port: 8080
+    },
     entry: [
         'webpack/hot/dev-server',
         'webpack-dev-server/client?http://localhost:8080',
         path.resolve(__dirname, 'app/app.js')],
     output:{
-        path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js',
+        path: __dirname + '/build',
+        filename: './bundle.js',
         publicPath: '/'
     },
     module: {
-
+        //加载器配置
         loaders: [
             {
                 test:/\.(jsx?|js)$/,
-                exclude:/node_modules/,
-                loader: 'babel',
+                exclude: path.resolve(__dirname,node_modules),
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
             },
             {
-                test: /\.(mp3|mp4|wav|ico|gif|png|jpg|jpeg|ttf|eot|svg|woff|otf(2)?)(\?[a-z0-9]+)?$/,
-                loader: 'file'
+                test: /\.(eot|ttf|woff|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/i,
+                loader: 'file-loader'
             },
             {
                 test: /\.(css|scss|less)$/,
+                include: path.resolve(__dirname, 'app'),
                 loader:'style!css'
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/i,
-                loader: 'url-loader?limit=10000&name=images/[name].[ext]',
+                test: /\.(png|jpg|jpeg|gif)$/,
+                loader: 'url?limit=8192'
 
-            },
-            {
-                test: /\.(eot|ttf|woff|woff(2))$/i,
-                loader: 'url?limit=100000'
             }
         ]
-    }
+    },
+    //其他解决方案配置
+    resolve: {
+       extensions: ['', '.js', '.jsx'],
+       //提高webpack搜索的速度
+       alias: {}
+    },
+    devtool: 'source-map',
+    'display-error-details': true,
+    //使用externals可以将react分离，然后用<script>单独将react引入
+    externals: [],
+    //插件项
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
+        new ExtractTextPlugin('app.css', {
+            allChunks: true,
+            disable: false
+        })
+    ]
 };

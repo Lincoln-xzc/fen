@@ -2,10 +2,10 @@
   "name": "fen",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "app/app.js",
   "scripts": {
     "test": "fen",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
+    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base app",
     "build": "webpack"
   },
   "repository": {

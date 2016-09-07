@@ -8,10 +8,6 @@ import {Link} from 'react-router';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
 import TopCarouselItem from '../midleware/topCarouselItem.js';
-import '../images/6.jpg';
-import '../style/app.css';
-import '../style/menu.css';
-import '../style/home.css';
 
 export default class Home extends React.Component {
     render(){
@@ -25,7 +21,7 @@ export default class Home extends React.Component {
                     <Row className = "show-grid">
                         <Col xs={6} md={6}>
                             <Link to="/cultural">
-                                <Thumbnail alt="171x180" src="../images/1.jpg" />
+                                <Thumbnail alt="171x180" src={require('../images/5.jpg')}/>
                             </Link>
                         </Col>
                         <Col xs={6} md={6}>
@@ -40,7 +36,7 @@ export default class Home extends React.Component {
                     <Row className = "show-grid">
                         <h1 className="rui-center">企业动态</h1>
                         <Col xs={12} md={6}>
-                            <img src="../images/6.jpg" className="left-img"/>
+                            <img src={require('../images/6.jpg')} className="left-img"/>
                             <div className="leftdown">
                                 <button>
                                     <Link to="/message">经营红薯米粉如何实现快速盈利</Link>
@@ -51,42 +47,42 @@ export default class Home extends React.Component {
                         <Col xs={12} md={6}>
                             <TopCarousel  height={125*5}>
                                 <TopCarouselItem>
-                                    <img src="../images/2.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/1.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/3.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/2.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
                                 <TopCarouselItem>
-                                    <img src="../images/6.jpg" style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
                                     <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
                                     <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
                                 </TopCarouselItem>
