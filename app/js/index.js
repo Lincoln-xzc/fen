@@ -6,7 +6,7 @@ import {render} from 'react-dom';
 import Menu from '../midleware/menu.js';
 import Footer from '../midleware/footer.js';
 import {Carousel, Grid, Row, Col,Thumbnail} from 'react-bootstrap';
-import '../style/app.css';
+
 
 export default  class Index extends React.Component{
     render(){

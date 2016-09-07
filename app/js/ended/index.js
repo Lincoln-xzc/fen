@@ -14,10 +14,10 @@ export default class Index extends React.Component{
                 <div className="menuNav">
                     <div className = 'title'>
                         <Link to = '/' className = 'photo'>
-                            <img src='/app/images/logo.jpg'/>
+                            <img src={require('../../images/logo.jpg')}/>
                         </Link>
                     </div>
-                    <div className="rui-right" style={{marginTop:-100+'px'}}>
+                    <div className="rui-right" style={{marginTop:-100+'px',marginRight:100+'px'}}>
                         <Link to='/home'>网站首页</Link>
                     </div>
                 </div>

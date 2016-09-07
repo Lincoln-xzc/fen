@@ -8,9 +8,7 @@ import {Link} from 'react-router';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
 import TopCarouselItem from '../midleware/topCarouselItem.js';
-import '../style/app.css';
-import '../style/menu.css';
-import '../style/home.css';
+
 
 export default class Home extends React.Component {
     render(){
@@ -24,7 +22,7 @@ export default class Home extends React.Component {
                     <Row className = "show-grid">
                         <Col xs={6} md={6}>
                             <Link to="/cultural">
-                                <Thumbnail alt="171x180" src={require('../images/5.jpg')} />
+                                <Thumbnail alt="171x180" src={require('../images/5.jpg')}/>
                             </Link>
                         </Col>
                         <Col xs={6} md={6}>
@@ -39,7 +37,8 @@ export default class Home extends React.Component {
                     <Row className = "show-grid">
                         <h1 className="rui-center">企业动态</h1>
                         <Col xs={12} md={6}>
-                            <img src={require('../images/5.jpg')} className="left-img"/>
+                            <img src={require('../images/6.jpg')} className="left-img"/>
+
                             <div className="leftdown">
                                 <button>
                                     <Link to="/message">经营红薯米粉如何实现快速盈利</Link>

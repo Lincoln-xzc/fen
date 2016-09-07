@@ -6,8 +6,13 @@
 var path = require('path');
 var webpack = require('webpack');
 
-//单独样式
-var ExtractTextPlugin  = require('extract-text-webpack-plugin');
+
+//编译后自动打开浏览器
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+
+//单独样式文件
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var node_modules = path.resolve(__dirname, 'node_modules');
 
 //编译后自动打开浏缆器
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
@@ -17,9 +22,9 @@ module.exports = {
         hot: true,
         inline: true,
         progress: true,
-        contentBase: './app',
-        host: 'localhost',
-        port: '8080'
+        contentBase: '/.app',
+        host: '0.0.0.0',
+        port: 8080
     },
     entry: [
         'webpack/hot/dev-server',
@@ -31,45 +36,47 @@ module.exports = {
         publicPath: '/'
     },
     module: {
-
+        //加载器配置
         loaders: [
             {
                 test:/\.(jsx?|js)$/,
-                exclude:/node_modules/,
-                loader: 'babel',
+                exclude: path.resolve(__dirname,node_modules),
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
             },
             {
-                test: /\.(mp3|mp4|wav|ico|gif|png|jpg|jpeg|ttf|eot|svg|woff|otf(2)?)(\?[a-z0-9]+)?$/,
-                loader: 'file'
+                test: /\.(eot|ttf|woff|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/i,
+                loader: 'file-loader'
             },
             {
                 test: /\.(css|scss|less)$/,
+                include: path.resolve(__dirname, 'app'),
                 loader:'style!css'
             },
             {
                 test: /\.(png|jpg|jpeg|gif)$/,
-                loader: 'url?limit=8192',
+                loader: 'url?limit=8192'
 
-            },
-            {
-                test: /\.(eot|ttf|woff|woff(2))$/,
-                loader: 'file-loader'
             }
         ]
     },
-    resolves: {
+    //其他解决方案配置
+    resolve: {
        extensions: ['', '.js', '.jsx'],
-        alias: {}
+       //提高webpack搜索的速度
+       alias: {}
     },
     devtool: 'source-map',
     'display-error-details': true,
+    //使用externals可以将react分离，然后用<script>单独将react引入
+    externals: [],
+    //插件项
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({url: 'http://localhost:8080'}),
-        new ExtractTextPlugin('app.css',{
+        new ExtractTextPlugin('app.css', {
             allChunks: true,
             disable: false
         })
