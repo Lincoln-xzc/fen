@@ -6,15 +6,28 @@
 var path = require('path');
 var webpack = require('webpack');
 
+//单独样式
+var ExtractTextPlugin  = require('extract-text-webpack-plugin');
 
+//编译后自动打开浏缆器
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 module.exports = {
+    devServer: {
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        progress: true,
+        contentBase: './app',
+        host: 'localhost',
+        port: '8080'
+    },
     entry: [
         'webpack/hot/dev-server',
         'webpack-dev-server/client?http://localhost:8080',
         path.resolve(__dirname, 'app/app.js')],
     output:{
-        path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js',
+        path: __dirname + '/build',
+        filename: './bundle.js',
         publicPath: '/'
     },
     module: {
@@ -37,14 +50,28 @@ module.exports = {
                 loader:'style!css'
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/i,
-                loader: 'url-loader?limit=10000&name=images/[name].[ext]',
+                test: /\.(png|jpg|jpeg|gif)$/,
+                loader: 'url?limit=8192',
 
             },
             {
-                test: /\.(eot|ttf|woff|woff(2))$/i,
-                loader: 'url?limit=100000'
+                test: /\.(eot|ttf|woff|woff(2))$/,
+                loader: 'file-loader'
             }
         ]
-    }
+    },
+    resolves: {
+       extensions: ['', '.js', '.jsx'],
+        alias: {}
+    },
+    devtool: 'source-map',
+    'display-error-details': true,
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
+        new ExtractTextPlugin('app.css',{
+            allChunks: true,
+            disable: false
+        })
+    ]
 };

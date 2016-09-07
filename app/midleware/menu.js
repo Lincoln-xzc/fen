@@ -4,20 +4,19 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link } from 'react-router';
-import logo from '../images/logo.jpg';
 import '../style/menu.css';
 
 export default  class Menu extends React.Component{
     render(){
         return (
-            <div className="menuNav">
+            <div className="menuNav" style={{background:'url('+require('../images/index_01.jpg')+')'}}>
                 <div className ="login_href">
                     <Link to = '/end/login' className="login">登录</Link>
                     <Link to = '/end/register'>注册</Link>
                 </div>
                 <div className = 'title'>
                     <Link to = '/' className = 'photo'>
-                        <img src="../images/logo.jpg"/>
+                        <img src={require('../images/logo.jpg')}/>
                     </Link>
                     <ul className = "rui-nav rui-bar">
                         <li><Link to='/'>首页</Link></li>
