@@ -51,9 +51,10 @@ export default class Login  extends React.Component{
             this.setState({capital: value});
     }
 
-    login(){
+    login(e){
+        e.preventDefault();
         console.log(this.state.name,this.state.password,this.state.capital);
-        fetch('http://localhost:3000/api/user',{
+        fetch('/api/user',{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
