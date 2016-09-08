@@ -4,7 +4,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Routers from './router.js';
-import {hashHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 import './style/app.css';
 import './style/footer.css';
 import './style/home.css';
@@ -13,5 +13,5 @@ import './style/bootstrap-theme.min.css';
 import './style/bootstrap.min.css';
 
 render(
-    <Routers history = {hashHistory}/>
+    <Routers history = {browserHistory}/>
     , document.getElementById('root'));

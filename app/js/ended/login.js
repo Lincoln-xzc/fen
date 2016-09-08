@@ -4,9 +4,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Row,Col,Form,FormControl,FormGroup,ControlLabel,Image,Panel} from 'react-bootstrap';
-import {Link, history} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import 'whatwg-fetch';
-
+import  SERVICE from '../../api/config';
 export default class Login  extends React.Component{
     constructor(props){
         super(props);
@@ -53,20 +53,22 @@ export default class Login  extends React.Component{
 
     login(e){
         e.preventDefault();
-        console.log(this.state.name,this.state.password,this.state.capital);
-        fetch('/api/user',{
+        fetch(SERVICE.END.LOGIN,{
             method: 'POST',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: SERVICE.HEADERS,
             body: JSON.stringify({
                 username: this.state.name,
                 password: this.state.password
             })
         }).then(function(response){
-            console.log(response);
-            /*history.replaceState(null,'/end/home');*/
+            return response.json();
+        }).then(function(result){
+            console.log(result);
+            if(result.success){
+                const path = '/end/home';
+                browserHistory.push(path);
+            }
+
         })
 
 
