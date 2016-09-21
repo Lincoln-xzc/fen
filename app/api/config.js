@@ -6,7 +6,7 @@ const LOCALHOST = 'http://localhost:3000/api/';
 module.exports = {
     HEADERS: {
     'Accept': 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    'Content-Type': 'application/json'
     },
     HOME: {
 
@@ -34,7 +34,7 @@ module.exports = {
 
         },
         LOGIN: LOCALHOST + 'user/login',
-        REGISTER: LOCALHOST + 'register',
+        REGISTER: LOCALHOST + 'user/register',
         DESCRIBE: {
 
         },
@@ -42,10 +42,9 @@ module.exports = {
 
         },
         IMAGES: {
-
+            LIST: LOCALHOST + 'images/list',
+            UPLOAD: LOCALHOST + 'images/upload'
         },
-        UPLOAD: {
 
-        }
     }
 };

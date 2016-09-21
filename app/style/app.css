@@ -159,3 +159,12 @@ body {
 .rui-right-2 {
     margin-right: 20px;
 }
+.tip-3 {
+    background-color: #67b168;
+    border: 1px solid #4cae4c;
+    opacity: 0.7;
+    height: 25px;
+    padding-left: 30px;
+    padding-top: 3px;
+    display: none;
+}
