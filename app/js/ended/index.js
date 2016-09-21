@@ -11,7 +11,7 @@ export default class Index extends React.Component{
     render(){
         return(
             <div className='ended'>
-                <div className="menuNav">
+                <div className="menuNav" style={{background:'url('+require('../../images/index_01.jpg')+')'}}>
                     <div className = 'title'>
                         <Link to = '/' className = 'photo'>
                             <img src={require('../../images/logo.jpg')}/>

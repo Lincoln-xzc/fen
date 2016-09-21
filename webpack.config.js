@@ -21,11 +21,11 @@ module.exports = {
         inline: true,
         progress: true,
         contentBase: '/.app',
-        host: '0.0.0.0',
+        host: 'localhost',
         port: 8080,
         proxy: {
-            '/api/*':{
-                target: 'http://localhost:3000',
+            '/index.php':{
+                target: 'http://www.huolieying.com',
                 secure: false
             }
         }

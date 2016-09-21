@@ -54,11 +54,12 @@ export default class Login  extends React.Component{
     login(e){
         e.preventDefault();
         console.log(this.state.name,this.state.password,this.state.capital);
-        fetch('/api/user',{
+        var url = 'http://localhost:3000/api/user/login';
+        fetch(url,{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
             body: JSON.stringify({
                 username: this.state.name,
@@ -70,7 +71,7 @@ export default class Login  extends React.Component{
         })
 
 
-    }
+    };
 
     render(){
         return(
