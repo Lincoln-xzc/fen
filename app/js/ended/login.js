@@ -61,13 +61,9 @@ export default class Login  extends React.Component{
                 username: this.state.name,
                 password: this.state.password
             })
-            }).then((response)=>{
+            }).then((response)=> {
             return response.json();
-<<<<<<< HEAD
-            }).then((result)=>{
-=======
-        }).then(function(result){
->>>>>>> 60dff84291743e46f646e89c2d3cfad1965a0d64
+        }).then((result) => {
             if(result.success){
                 const path = '/end/home';
                 browserHistory.push(path);
@@ -76,14 +72,7 @@ export default class Login  extends React.Component{
     };
 
     componentDidMount =() => {
-       function push(array, ...items) {
-           array.push(...items);
-       }
-       function add(x, y) {
-           return x + y ;
-       }
-       var numbers = [4, 38];
-       add(...numbers);
+
     };
 
     render(){

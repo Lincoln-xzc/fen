@@ -43,7 +43,9 @@ module.exports = {
         },
         IMAGES: {
             LIST: LOCALHOST + 'images/list',
-            UPLOAD: LOCALHOST + 'images/upload'
+            UPLOAD: LOCALHOST + 'images/upload',
+            UPDATE: LOCALHOST + 'images/update',
+            DELETE: LOCALHOST + 'images/delete/'
         },
 
     }
