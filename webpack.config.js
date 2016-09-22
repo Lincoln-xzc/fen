@@ -23,12 +23,12 @@ module.exports = {
         contentBase: '/.app',
         host: 'localhost',
         port: 8080,
-        proxy: {
-            '/index.php':{
-                target: 'http://www.huolieying.com',
+        /*proxy: {
+            '/api/!*':{
+                target: 'http://localhost:3000',
                 secure: false
             }
-        }
+        }*/
     },
     entry: [
         'webpack/hot/dev-server',
@@ -45,10 +45,10 @@ module.exports = {
             {
                 test:/\.(jsx?|js)$/,
                 exclude: path.resolve(__dirname,node_modules),
-                loader: 'babel-loader',
-                query: {
+                loader: 'babel-loader'
+                /*query: {
                     presets: ['es2015', 'react']
-                }
+                }*/
             },
             {
                 test: /\.(eot|ttf|woff|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/i,

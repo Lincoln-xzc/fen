@@ -9,7 +9,7 @@ import '../style/menu.css';
 export default  class Menu extends React.Component{
     render(){
         return (
-            <div className="menuNav" style={{background:'url('+require('../images/index_01.jpg')+')'}}>
+            <div className="menuNav">
                 <div className ="login_href">
                     <Link to = '/end/login' className="login">登录</Link>
                     <Link to = '/end/register'>注册</Link>

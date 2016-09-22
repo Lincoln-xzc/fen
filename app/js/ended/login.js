@@ -4,9 +4,9 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Row,Col,Form,FormControl,FormGroup,ControlLabel,Image,Panel} from 'react-bootstrap';
-import {Link, history} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import 'whatwg-fetch';
-
+import  SERVICE from '../../api/config';
 export default class Login  extends React.Component{
     constructor(props){
         super(props);
@@ -22,7 +22,6 @@ export default class Login  extends React.Component{
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePWChange = this.handlePWChange.bind(this);
         this.handleCpChange = this.handleCpChange.bind(this);
-        this.login = this.login.bind(this);
     }
 
     handleNameChange(e){
@@ -51,26 +50,34 @@ export default class Login  extends React.Component{
             this.setState({capital: value});
     }
 
-    login(e){
+    login =(e)=>{
         e.preventDefault();
-        console.log(this.state.name,this.state.password,this.state.capital);
-        var url = 'http://localhost:3000/api/user/login';
-        fetch(url,{
+        fetch(SERVICE.END.LOGIN,{
             method: 'POST',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            },
+            headers: SERVICE.HEADERS,
             body: JSON.stringify({
                 username: this.state.name,
                 password: this.state.password
             })
-        }).then(function(response){
-            console.log(response);
-            /*history.replaceState(null,'/end/home');*/
+            }).then((response)=>{
+            return response.json();
+            }).then((result)=>{
+            if(result.success){
+                const path = '/end/home';
+                browserHistory.push(path);
+            }
         })
+    };
 
-
+    componentDidMount =() => {
+       function push(array, ...items) {
+           array.push(...items);
+       }
+       function add(x, y) {
+           return x + y ;
+       }
+       var numbers = [4, 38];
+       add(...numbers);
     };
 
     render(){

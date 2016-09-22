@@ -46,7 +46,7 @@ export default class ChildMenu extends React.Component{
         });
         return(
             <div className = 'childMenu'>
-                <img src="/app/images/title.png" className="left-title"/>
+                <img src={require('../images/title.png')} className="left-title"/>
                 <h1 className='rui-center'>{this.props.menuTree.title}</h1>
                 <div className="leftMenu">
                     {rows}
