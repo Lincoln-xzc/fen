@@ -52,6 +52,8 @@ export default class Login  extends React.Component{
 
     login =(e)=>{
         e.preventDefault();
+        console.log(this.state.name);
+        console.log(this.state.password);
         fetch(SERVICE.END.LOGIN,{
             method: 'POST',
             headers: SERVICE.HEADERS,
@@ -61,7 +63,11 @@ export default class Login  extends React.Component{
             })
             }).then((response)=>{
             return response.json();
+<<<<<<< HEAD
             }).then((result)=>{
+=======
+        }).then(function(result){
+>>>>>>> 60dff84291743e46f646e89c2d3cfad1965a0d64
             if(result.success){
                 const path = '/end/home';
                 browserHistory.push(path);
@@ -94,7 +100,7 @@ export default class Login  extends React.Component{
                                     用户名：
                                 </Col>
                                 <Col sm={10}>
-                                    <FormControl type="text" placeholder="请输入用户名"  name="name" onChange={this.handleNameChange} size="30"/>
+                                    <FormControl type="text" placeholder="请输入用户名"  onChange={this.handleNameChange} size="30"/>
                                 </Col>
                             </FormGroup>
                             <FormGroup>
