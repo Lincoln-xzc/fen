@@ -11,6 +11,8 @@ import './style/home.css';
 import './style/menu.css';
 import './style/bootstrap-theme.min.css';
 import './style/bootstrap.min.css';
+import  './style/Draft.css';
+import './style/RichEditor.css';
 
 render(
     <Routers history = {browserHistory}/>

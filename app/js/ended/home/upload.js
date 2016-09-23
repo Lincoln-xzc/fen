@@ -12,7 +12,7 @@ export default class Upload extends React.Component{
         super(props);
         this.state = {
             file: {
-                'name':'',
+                'name':''
             },
             message: '',
             files: ''
