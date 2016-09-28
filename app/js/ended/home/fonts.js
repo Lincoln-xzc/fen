@@ -4,24 +4,42 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Editor, EditorState, RichUtils} from 'draft-js';
-import {Button, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap';
+import {Button, FormGroup, FormControl, Col, ControlLabel, Table, Modal, Form} from 'react-bootstrap';
 import 'whatwg-fetch';
 import  SERVICE from '../../../api/config';
 
 export default class Fonts extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty(),title: ''};
+        this.state = {
+            editorState: EditorState.createEmpty(),
+            showModal: false,
+            title: '',
+            content: '',
+            contents: []
+        };
 
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({editorState});
-
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.onTab = (e) => this._onTab(e);
         this.toggleBlockType = (type) => this._toggleBlockType(type);
         this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
     }
 
+    componentDidMount(){
+        let contents = [];
+        fetch(SERVICE.END.FONTS.LIST,{
+            method: 'POST',
+            headers: SERVICE.HEADERS
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            contents = result.data;
+            this.setState({'contents': contents});
+        });
+
+    }
     _handleKeyCommand(command) {
         const {editorState} = this.state;
         const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -55,23 +73,58 @@ export default class Fonts extends React.Component{
         );
     }
 
+    close =() => {
+        this.setState({showModal: false});
+    };
+
+    cancel =() => {
+        this.setState({showDetail: false});
+    };
+
+    add =() => {
+        this.setState({showModal: true});
+    };
+
+    open =(content) => {
+        this.setState({title: content.title});
+        this.setState({showDetail: true});
+    };
+
     handleTitleChange = (e) => {
         let title = e.target.value;
         this.setState({'title': title})
-    }
+    };
 
     commit =()=> {
+        console.log(this.state.editorState);
         const public_content =  document.getElementsByClassName("public-DraftEditor-content")[0].children;
-        const content = public_content[0].innerHTML;
+        const ele = public_content[0].innerHTML;
         fetch(SERVICE.END.FONTS.ADD,{
             method: 'POST',
             headers: SERVICE.HEADERS,
             body: JSON.stringify({
                 'title': this.state.title,
-                'content': content
+                'element': ele,
+                'content': this.state.content
             })
+        }).then((response) =>{
+            return response.json();
+        }).then((result) => {
+            this.setState({showModal: false});
         })
     };
+
+    deleteBy = (id) =>{
+        fetch(SERVICE.END.FONTS.DELETE+id, {
+            method: 'POST',
+            headers: SERVICE.HEADERS
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            console.log(result);
+        })
+    };
+
     render() {
         const {editorState} = this.state;
 
@@ -86,36 +139,76 @@ export default class Fonts extends React.Component{
         }
         return (
             <div>
-                <h4>编辑文字信息</h4>
-                <FormGroup style={{paddingBottom:0,paddingTop:10 +'px'}}>
-                    <Col componentClass={ControlLabel}>
-                        <FormControl type="text" value={this.state.name}  placeholder = '请输入文章标题' onChange={this.handleTitleChange} size="30" style={{display:'inline'}}/>
-                    </Col>
-                </FormGroup>
-                <div className="RichEditor-root">
-                    <BlockStyleControls
-                        editorState={editorState}
-                        onToggle={this.toggleBlockType}
-                        />
-                    <InlineStyleControls
-                        editorState={editorState}
-                        onToggle={this.toggleInlineStyle}
-                        />
-                    <div className={className} onClick={this.focus}>
-                        <Editor
-                            blockStyleFn={getBlockStyle}
-                            customStyleMap={styleMap}
-                            editorState={editorState}
-                            handleKeyCommand={this.handleKeyCommand}
-                            onChange={this.onChange}
-                            onTab={this.onTab}
-                            placeholder="请输入文章内容"
-                            ref="editor"
-                            spellCheck={true}
-                            />
-                    </div>
+                <h4>文章列表</h4>
+                <div>
+                    <Button bsStyle="success" bsSize="small"  style={{marginBottom:5+'px',display:'block'}} onClick={(e) => this.add()}>新增</Button>
                 </div>
-                <Button  bsStyle="success" style={{marginTop:20+'px',textAlign:'center'}} onClick={this.commit}>提交</Button>
+                <Table responsive hover>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>标题</th>
+                        <th>内容</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.contents.map((content, i) => <tr key={i+1}>
+                        <td>{i+1}</td>
+                        <td>{content.title}</td>
+                        <td>{content.content}</td>
+                        <td>{content.create_time}</td>
+                        <td>{content.create_name}</td>
+                        <td>
+                            <Button bsStyle="danger" bsSize="small" onClick={(e) => this.deleteBy(content.id)}>删除</Button>
+                        </td>
+                    </tr>)}
+                    </tbody>
+                </Table>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>新增详情</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <FormGroup style={{paddingBottom:0,paddingTop:10 +'px'}}>
+                                <Col componentClass={ControlLabel}>
+                                    <FormControl type="text" value={this.state.title}  placeholder = '请输入文章标题' onChange={this.handleTitleChange} size="30" style={{display:'inline'}}/>
+                                </Col>
+                            </FormGroup>
+                            <div className="RichEditor-root">
+                                <BlockStyleControls
+                                    editorState={editorState}
+                                    onToggle={this.toggleBlockType}
+                                    />
+                                <InlineStyleControls
+                                    editorState={editorState}
+                                    onToggle={this.toggleInlineStyle}
+                                    />
+                                <div className={className} onClick={this.focus}>
+                                    <Editor
+                                        blockStyleFn={getBlockStyle}
+                                        customStyleMap={styleMap}
+                                        editorState={editorState}
+                                        handleKeyCommand={this.handleKeyCommand}
+                                        onChange={this.onChange}
+                                        onTab={this.onTab}
+                                        placeholder="请输入文章内容"
+                                        ref="editor"
+                                        value={this.state.content}
+                                        spellCheck={true}
+                                        />
+                                </div>
+                            </div>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.close}>关闭</Button>
+                        <Button onClick={this.commit}>新增</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

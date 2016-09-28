@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b11f1e7131f18ff3914c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5f04a1bc6b90b380a063"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -58101,12 +58101,23 @@
 	        LOGIN: LOCALHOST + 'user/login',
 	        REGISTER: LOCALHOST + 'user/register',
 	        DESCRIBE: {},
-	        FONTS: {},
+	        FONTS: {
+	            'ADD': LOCALHOST + 'article/add',
+	            'DELETE': LOCALHOST + 'article/delete/',
+	            'UPDATE': LOCALHOST + 'article/update',
+	            'LIST': LOCALHOST + 'article/list'
+	        },
 	        IMAGES: {
 	            LIST: LOCALHOST + 'images/list',
 	            UPLOAD: LOCALHOST + 'images/upload',
 	            UPDATE: LOCALHOST + 'images/update',
 	            DELETE: LOCALHOST + 'images/delete/'
+	        },
+	        MAINS: {
+	            ADD: LOCALHOST + 'main/add',
+	            DELETE: LOCALHOST + 'main/delete/',
+	            UPDATE: LOCALHOST + 'main/update',
+	            LIST: LOCALHOST + 'main/list'
 	        }
 	
 	    }
@@ -59356,6 +59367,14 @@
 	
 	var _draftJs = __webpack_require__(620);
 	
+	var _reactBootstrap = __webpack_require__(325);
+	
+	__webpack_require__(612);
+	
+	var _config = __webpack_require__(613);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59375,7 +59394,65 @@
 	
 	        var _this = _possibleConstructorReturn(this, (Fonts.__proto__ || Object.getPrototypeOf(Fonts)).call(this, props));
 	
-	        _this.state = { editorState: _draftJs.EditorState.createEmpty() };
+	        _this.close = function () {
+	            _this.setState({ showModal: false });
+	        };
+	
+	        _this.cancel = function () {
+	            _this.setState({ showDetail: false });
+	        };
+	
+	        _this.add = function () {
+	            _this.setState({ showModal: true });
+	        };
+	
+	        _this.open = function (content) {
+	            _this.setState({ title: content.title });
+	            _this.setState({ showDetail: true });
+	        };
+	
+	        _this.handleTitleChange = function (e) {
+	            var title = e.target.value;
+	            _this.setState({ 'title': title });
+	        };
+	
+	        _this.commit = function () {
+	            console.log(_this.state.editorState);
+	            var public_content = document.getElementsByClassName("public-DraftEditor-content")[0].children;
+	            var ele = public_content[0].innerHTML;
+	            fetch(_config2.default.END.FONTS.ADD, {
+	                method: 'POST',
+	                headers: _config2.default.HEADERS,
+	                body: JSON.stringify({
+	                    'title': _this.state.title,
+	                    'element': ele,
+	                    'content': _this.state.content
+	                })
+	            }).then(function (response) {
+	                return response.json();
+	            }).then(function (result) {
+	                _this.setState({ showModal: false });
+	            });
+	        };
+	
+	        _this.deleteBy = function (id) {
+	            fetch(_config2.default.END.FONTS.DELETE + id, {
+	                method: 'POST',
+	                headers: _config2.default.HEADERS
+	            }).then(function (response) {
+	                return response.json();
+	            }).then(function (result) {
+	                console.log(result);
+	            });
+	        };
+	
+	        _this.state = {
+	            editorState: _draftJs.EditorState.createEmpty(),
+	            showModal: false,
+	            title: '',
+	            content: '',
+	            contents: []
+	        };
 	
 	        _this.focus = function () {
 	            return _this.refs.editor.focus();
@@ -59383,7 +59460,6 @@
 	        _this.onChange = function (editorState) {
 	            return _this.setState({ editorState: editorState });
 	        };
-	
 	        _this.handleKeyCommand = function (command) {
 	            return _this._handleKeyCommand(command);
 	        };
@@ -59400,6 +59476,22 @@
 	    }
 	
 	    _createClass(Fonts, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            var contents = [];
+	            fetch(_config2.default.END.FONTS.LIST, {
+	                method: 'POST',
+	                headers: _config2.default.HEADERS
+	            }).then(function (response) {
+	                return response.json();
+	            }).then(function (result) {
+	                contents = result.data;
+	                _this2.setState({ 'contents': contents });
+	            });
+	        }
+	    }, {
 	        key: '_handleKeyCommand',
 	        value: function _handleKeyCommand(command) {
 	            var editorState = this.state.editorState;
@@ -59430,6 +59522,8 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+	
 	            var editorState = this.state.editorState;
 	
 	            // If the user changes block type before entering any text, we can
@@ -59442,32 +59536,184 @@
 	                    className += ' RichEditor-hidePlaceholder';
 	                }
 	            }
-	
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'RichEditor-root' },
-	                _react2.default.createElement(BlockStyleControls, {
-	                    editorState: editorState,
-	                    onToggle: this.toggleBlockType
-	                }),
-	                _react2.default.createElement(InlineStyleControls, {
-	                    editorState: editorState,
-	                    onToggle: this.toggleInlineStyle
-	                }),
+	                null,
+	                _react2.default.createElement(
+	                    'h4',
+	                    null,
+	                    '文章列表'
+	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: className, onClick: this.focus },
-	                    _react2.default.createElement(_draftJs.Editor, {
-	                        blockStyleFn: getBlockStyle,
-	                        customStyleMap: styleMap,
-	                        editorState: editorState,
-	                        handleKeyCommand: this.handleKeyCommand,
-	                        onChange: this.onChange,
-	                        onTab: this.onTab,
-	                        placeholder: 'Tell a story...',
-	                        ref: 'editor',
-	                        spellCheck: true
-	                    })
+	                    null,
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Button,
+	                        { bsStyle: 'success', bsSize: 'small', style: { marginBottom: 5 + 'px', display: 'block' }, onClick: function onClick(e) {
+	                                return _this3.add();
+	                            } },
+	                        '新增'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.Table,
+	                    { responsive: true, hover: true },
+	                    _react2.default.createElement(
+	                        'thead',
+	                        null,
+	                        _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '#'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '标题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '内容'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '创建人'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '创建时间'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '操作'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tbody',
+	                        null,
+	                        this.state.contents.map(function (content, i) {
+	                            return _react2.default.createElement(
+	                                'tr',
+	                                { key: i + 1 },
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    i + 1
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    content.title
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    content.content
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    content.create_time
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    content.create_name
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactBootstrap.Button,
+	                                        { bsStyle: 'danger', bsSize: 'small', onClick: function onClick(e) {
+	                                                return _this3.deleteBy(content.id);
+	                                            } },
+	                                        '删除'
+	                                    )
+	                                )
+	                            );
+	                        })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.Modal,
+	                    { show: this.state.showModal, onHide: this.close },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Header,
+	                        { closeButton: true },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Title,
+	                            null,
+	                            '新增详情'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Body,
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Form,
+	                            null,
+	                            _react2.default.createElement(
+	                                _reactBootstrap.FormGroup,
+	                                { style: { paddingBottom: 0, paddingTop: 10 + 'px' } },
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Col,
+	                                    { componentClass: _reactBootstrap.ControlLabel },
+	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', value: this.state.title, placeholder: '请输入文章标题', onChange: this.handleTitleChange, size: '30', style: { display: 'inline' } })
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'RichEditor-root' },
+	                                _react2.default.createElement(BlockStyleControls, {
+	                                    editorState: editorState,
+	                                    onToggle: this.toggleBlockType
+	                                }),
+	                                _react2.default.createElement(InlineStyleControls, {
+	                                    editorState: editorState,
+	                                    onToggle: this.toggleInlineStyle
+	                                }),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: className, onClick: this.focus },
+	                                    _react2.default.createElement(_draftJs.Editor, {
+	                                        blockStyleFn: getBlockStyle,
+	                                        customStyleMap: styleMap,
+	                                        editorState: editorState,
+	                                        handleKeyCommand: this.handleKeyCommand,
+	                                        onChange: this.onChange,
+	                                        onTab: this.onTab,
+	                                        placeholder: '请输入文章内容',
+	                                        ref: 'editor',
+	                                        value: this.state.content,
+	                                        spellCheck: true
+	                                    })
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Footer,
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            { onClick: this.close },
+	                            '关闭'
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            { onClick: this.commit },
+	                            '新增'
+	                        )
+	                    )
 	                )
 	            );
 	        }
@@ -59503,13 +59749,13 @@
 	    function StyleButton() {
 	        _classCallCheck(this, StyleButton);
 	
-	        var _this2 = _possibleConstructorReturn(this, (StyleButton.__proto__ || Object.getPrototypeOf(StyleButton)).call(this));
+	        var _this4 = _possibleConstructorReturn(this, (StyleButton.__proto__ || Object.getPrototypeOf(StyleButton)).call(this));
 	
-	        _this2.onToggle = function (e) {
+	        _this4.onToggle = function (e) {
 	            e.preventDefault();
-	            _this2.props.onToggle(_this2.props.style);
+	            _this4.props.onToggle(_this4.props.style);
 	        };
-	        return _this2;
+	        return _this4;
 	    }
 	
 	    _createClass(StyleButton, [{
@@ -76959,6 +77205,14 @@
 	
 	var _reactDom = __webpack_require__(110);
 	
+	var _reactBootstrap = __webpack_require__(325);
+	
+	__webpack_require__(612);
+	
+	var _config = __webpack_require__(613);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -76973,19 +77227,230 @@
 	var Describe = function (_React$Component) {
 	    _inherits(Describe, _React$Component);
 	
-	    function Describe() {
+	    function Describe(props) {
 	        _classCallCheck(this, Describe);
 	
-	        return _possibleConstructorReturn(this, (Describe.__proto__ || Object.getPrototypeOf(Describe)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Describe.__proto__ || Object.getPrototypeOf(Describe)).call(this, props));
+	
+	        _this.close = function () {
+	            _this.setState({ showModal: false });
+	        };
+	
+	        _this.add = function () {
+	            _this.setState({ showModal: true });
+	        };
+	
+	        _this.state = {
+	            'main': [],
+	            'showModal': false,
+	            'id': '',
+	            'name': '',
+	            'url': '',
+	            'size': '',
+	            'type': '',
+	            'upload_time': '',
+	            'upload_name': ''
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(Describe, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            var main = [];
+	            fetch(_config2.default.END.MAINS.LIST, {
+	                method: 'POST',
+	                headers: _config2.default.HEADERS
+	            }).then(function (response) {
+	                return response.json();
+	            }).then(function (result) {
+	                images = result.data;
+	                _this2.setState({ 'main': main });
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+	
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                '描述'
+	                _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'success', bsSize: 'small', style: { marginBottom: 5 + 'px' }, onClick: function onClick(e) {
+	                            return _this3.add();
+	                        } },
+	                    '详情'
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.Table,
+	                    { responsive: true, hover: true },
+	                    _react2.default.createElement(
+	                        'thead',
+	                        null,
+	                        _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '#'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '图片'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '标题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '内容'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '标记'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tbody',
+	                        null,
+	                        this.state.main.map(function (main, i) {
+	                            return _react2.default.createElement(
+	                                'tr',
+	                                { key: i + 1 },
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    i + 1
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    _react2.default.createElement('img', { src: 'http://localhost:3000/api/images?path=' + main.url, style: { width: 60 + 'px', height: 40 + 'px' } })
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    main.title
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    main.content
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    main.recommand
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactBootstrap.Button,
+	                                        { bsStyle: 'success', bsSize: 'small', value: image, style: { marginBottom: 5 + 'px' }, onClick: function onClick(e) {
+	                                                return _this3.open(image);
+	                                            } },
+	                                        '详情'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        _reactBootstrap.Button,
+	                                        { bsStyle: 'danger', bsSize: 'small', onClick: function onClick(e) {
+	                                                return _this3.deleteBy(image.id);
+	                                            } },
+	                                        '删除'
+	                                    )
+	                                )
+	                            );
+	                        })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.Modal,
+	                    { show: this.state.showModal, onHide: this.close },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Header,
+	                        { closeButton: true },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Title,
+	                            null,
+	                            '图片详情'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Body,
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Form,
+	                            null,
+	                            _react2.default.createElement(
+	                                _reactBootstrap.FormGroup,
+	                                null,
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Col,
+	                                    { componentClass: _reactBootstrap.ControlLabel, sm: 3 },
+	                                    '图片名：'
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Col,
+	                                    { sm: 9 },
+	                                    _react2.default.createElement(
+	                                        _reactBootstrap.FormControl,
+	                                        { componentClass: 'select', placeholder: 'select' },
+	                                        _react2.default.createElement(
+	                                            'option',
+	                                            { value: 'select' },
+	                                            'select'
+	                                        ),
+	                                        _react2.default.createElement(
+	                                            'option',
+	                                            { value: 'other' },
+	                                            '...'
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                _reactBootstrap.FormGroup,
+	                                { style: { height: 100 + 'px' } },
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Col,
+	                                    { componentClass: _reactBootstrap.ControlLabel, sm: 3 },
+	                                    '图片：'
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactBootstrap.Col,
+	                                    { sm: 9 },
+	                                    _react2.default.createElement('img', { src: 'http://localhost:3000/api/images?path=' + this.state.url, style: { width: 200 + 'px', height: 100 + 'px' } })
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal.Footer,
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            { onClick: this.close },
+	                            '关闭'
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            { onClick: this.update },
+	                            '更新'
+	                        )
+	                    )
+	                )
 	            );
 	        }
 	    }]);

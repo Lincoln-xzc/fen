@@ -40,7 +40,7 @@ module.exports = {
         },
         FONTS: {
             'ADD': LOCALHOST + 'article/add',
-            'DELETE': LOCALHOST + 'article/delete',
+            'DELETE': LOCALHOST + 'article/delete/',
             'UPDATE': LOCALHOST + 'article/update',
             'LIST': LOCALHOST + 'article/list'
         },
@@ -49,6 +49,12 @@ module.exports = {
             UPLOAD: LOCALHOST + 'images/upload',
             UPDATE: LOCALHOST + 'images/update',
             DELETE: LOCALHOST + 'images/delete/'
+        },
+        MAINS: {
+            ADD: LOCALHOST + 'main/add',
+            DELETE: LOCALHOST + 'main/delete/',
+            UPDATE: LOCALHOST + 'main/update',
+            LIST: LOCALHOST + 'main/list'
         }
 
     }
