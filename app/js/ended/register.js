@@ -5,6 +5,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Row,Col,Form, FormControl,ControlLabel,FormGroup,Image,Panel} from 'react-bootstrap';
 import 'whatwg-fetch';
+import {browserHistory} from 'react-router';
 import  SERVICE from '../../api/config';
 
 export default class Register extends React.Component{
@@ -83,7 +84,10 @@ export default class Register extends React.Component{
         }).then(function(response){
             return response.json();
         }).then(function(result){
-            console.log(result);
+            if(result.success){
+                const path = '/end/login';
+                browserHistory.push(path);
+            }
         })
     }
     render(){

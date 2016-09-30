@@ -58,8 +58,6 @@ export default class Images extends React.Component{
     };
 
     update =() => {
-        console.log(this.state.id);
-        console.log(this.state.name);
         fetch(SERVICE.END.IMAGES.UPDATE,{
             method: 'POST',
             headers: SERVICE.HEADERS,
