@@ -8,7 +8,8 @@ import {Link} from 'react-router';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
 import TopCarouselItem from '../midleware/topCarouselItem.js';
-
+import 'whatwg-fetch';
+import SERVICE from '../api/config';
 
 export default class Home extends React.Component {
     render(){
