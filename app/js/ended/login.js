@@ -52,8 +52,6 @@ export default class Login  extends React.Component{
 
     login =(e)=>{
         e.preventDefault();
-        console.log(this.state.name);
-        console.log(this.state.password);
         fetch(SERVICE.END.LOGIN,{
             method: 'POST',
             headers: SERVICE.HEADERS,

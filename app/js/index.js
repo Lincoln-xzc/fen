@@ -13,11 +13,7 @@ export default  class Index extends React.Component{
     constructor(props){
         super(props);
         this.state= {
-            'HomeCarousels':[],
-            'HomeCultural':[],
-            'HomeCenter':[],
-            'HomeMessage':[],
-
+            'HomeCarousels':[]
         }
     }
     componentDidMount(){
@@ -45,7 +41,7 @@ export default  class Index extends React.Component{
                 <Carousel className="rui_carousel">
                     {this.state.HomeCarousels.map((carousel, i) =>
                         <Carousel.Item key={i+1}>
-                            <img width={1420} height={700} alt="1000x700" sylt={{'height':700+'px'}} src={'http://localhost:3000/api/images?path='+carousel.url}/>
+                            <img width={1420} height={700} alt="1000x700" style={{'height':600+'px'}} src={'http://localhost:3000/api/images?path='+carousel.url}/>
                             <Carousel.Caption>
                             <h3>carousel.name</h3>
                             <p>carousel.title</p>

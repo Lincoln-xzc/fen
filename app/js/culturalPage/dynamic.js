@@ -4,34 +4,43 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link } from 'react-router';
+import 'whatwg-fetch';
+import SERVICE from '../../api/config';
 
 export default  class Dynamic extends React.Component{
+    constructor(props){
+        super(props);
+        this.state= {
+            'CompanyDynamic':[]
+        };
+
+    }
+    componentDidMount(){
+        let CompanyDynamic = [];
+        fetch(SERVICE.FINDBYCONDITION,{
+            method: 'POST',
+            headers: SERVICE.HEADERS,
+            body: JSON.stringify({'remark': 'cultural','tip': 'dynamic'})
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            CompanyDynamic = result.data;
+            this.setState({'CompanyDynamic': CompanyDynamic});
+            console.log(CompanyDynamic);
+        });
+    };
     render(){
         return(
             <div>
                 <h4>行业动态</h4>
                 <div className="rui-list">
                     <ul>
-                        <li>
-                            <Link to="/cultural/dynamic/detail"><span>吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</span></Link>
-                            <span className="rui-right">2015-11-05</span>
-                        </li>
-                        <li>
-                            <Link to="/cultural/dynamic/detail"><span>鱼粉的精髓</span></Link>
-                            <span className="rui-right">2015-11-05</span>
-                        </li>
-                        <li>
-                            <Link to="/cultural/dynamic/detail"><span>鱼粉的精髓</span></Link>
-                            <span className="rui-right">2015-11-05</span>
-                        </li>
-                        <li>
-                            <Link to="/cultural/dynamic/detail"><span>鱼粉的精髓</span></Link>
-                            <span className="rui-right">2015-11-05</span>
-                        </li>
-                        <li>
-                            <Link to="/cultural/dynamic/detail"><span>鱼粉的精髓</span></Link>
-                            <span className="rui-right">2015-11-05</span>
-                        </li>
+                        {this.state.CompanyDynamic.map((dynamic,i)=>
+                            <li key={i}>
+                                <Link to="/cultural/dynamic/detail"><span>{dynamic.title}</span></Link>
+                                <span className="rui-right">{dynamic.update_time}</span>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
