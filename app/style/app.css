@@ -44,7 +44,7 @@ body {
 }
 .thumbnail img {
     width: 452px;
-    height: 360px !important;
+    height: 350px !important;
 }
 .product_list img {
     width: 297px;
@@ -167,4 +167,8 @@ body {
     padding-left: 30px;
     padding-top: 3px;
     display: none;
+}
+.tip-4 {
+    color: #67b168;
+    font-size: 20px;
 }

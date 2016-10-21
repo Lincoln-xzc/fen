@@ -8,27 +8,8 @@ module.exports = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
     },
-    HOME: {
-
-    },
-    INTRODUCTION: {
-
-    },
-    PRODUCTS: {
-
-    },
-    CULTURAL: {
-
-    },
-    CENTER: {
-
-    },
-    MESSAGE: {
-
-    },
-    CONTRACT: {
-
-    },
+    FINDBYCONDITION: LOCALHOST + 'main/findByCondition',
+    MESSAGE: LOCALHOST + 'message/save',
     END: {
         HOME: {
 

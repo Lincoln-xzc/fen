@@ -8,28 +8,62 @@ import {Link} from 'react-router';
 import ProductList from '../midleware/productList.js';
 import TopCarousel from '../midleware/topCarousel.js';
 import TopCarouselItem from '../midleware/topCarouselItem.js';
-
+import 'whatwg-fetch';
+import SERVICE from '../api/config';
 
 export default class Home extends React.Component {
+    constructor(props){
+        super(props);
+        this.state= {
+            'HomeCultural':[],
+            'HomeMessage' :[]
+        };
+
+    }
+    componentDidMount(){
+        let HomeCultural = [];
+        let HomeMessage = [];
+        fetch(SERVICE.FINDBYCONDITION,{
+            method: 'POST',
+            headers: SERVICE.HEADERS,
+            body: JSON.stringify({'remark': 'home','tip': 'cultural'})
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            HomeCultural = result.data;
+            this.setState({'HomeCultural': HomeCultural});
+        });
+        fetch(SERVICE.FINDBYCONDITION,{
+            method: 'POST',
+            headers: SERVICE.HEADERS,
+            body: JSON.stringify({'remark': 'home','tip': 'message'})
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            HomeMessage = result.data;
+            this.setState({'HomeMessage': HomeMessage});
+        });
+    };
+
     render(){
         return (
             <div className="home">
                 <Grid>
                     <Row className="show-grid">
-                        <Col xs={6} md={3} mdOffset={3}><h1>企业文化</h1></Col>
-                        <Col xs={6} md={6}><h3 className="rui-right">电话号码:0599-3861537</h3></Col>
+                        <Col xs={6} md={3} mdOffset={5}><h1>企业文化</h1></Col>
                     </Row>
-                    <Row className = "show-grid">
-                        <Col xs={6} md={6}>
-                            <Link to="/cultural">
-                                <Thumbnail alt="171x180" src={require('../images/5.jpg')}/>
-                            </Link>
-                        </Col>
-                        <Col xs={6} md={6}>
-                            <p>禾谷渔粉在继承传统鱼粉烹饪技术的基础上将古法秘制的中草药香料配方与现代快餐加工完美结合，创新出浓香四溢、别具特色的经典美味。以飘香麻辣、奇香诱人的独特风味风靡全国，成为风味快餐的知名品牌、渔粉餐饮的第一品牌。</p>
-                            <p>禾谷专用渔粉，以优质大米为材料，采用传统蒸煮工艺、现代低温室内烘干技术制造，100%不含添加剂及食用胶，禾谷渔粉美食从选料、备料清晰、切片到炒粉、煮汤、泡粉、煮粉、调口、无不专注和用心。禾谷渔粉高汤以多种草药额香料配方，加纯猪骨，严格按熬制流程和标准熬煮而成。细嫩爽滑的渔粉，香飘九巷的高汤，老少皆宜，男女通吃。“食之美不只在美味更在其神，平凡的渔粉在禾谷的精心烹饪中演绎如此精彩，必将使之传承百年、生生不息。”</p>
-                        </Col>
-                    </Row>
+                    {this.state.HomeCultural.map((cultural, i) =>
+                        <Row className = "show-grid" key={i+1}>
+                            <Col xs={6} md={6}>
+                                <Link to="/cultural">
+                                    <Thumbnail alt="171x180" src={'http://localhost:3000/api/images?path='+cultural.url} style={{width:500 + 'px', height:360+'px'}}/>
+                                </Link>
+                            </Col>
+                            <Col xs={6} md={6}>
+                                <div dangerouslySetInnerHTML={{__html: cultural.content}}/>
+                            </Col>
+                        </Row>
+                    )}
                     <Row className = "show-grid">
                         <h1 className="rui-center">产品中心</h1>
                         <ProductList width={280} height={346}/>
@@ -38,7 +72,6 @@ export default class Home extends React.Component {
                         <h1 className="rui-center">企业动态</h1>
                         <Col xs={12} md={6}>
                             <img src={require('../images/6.jpg')} className="left-img"/>
-
                             <div className="leftdown">
                                 <button>
                                     <Link to="/message">经营红薯米粉如何实现快速盈利</Link>
@@ -48,46 +81,13 @@ export default class Home extends React.Component {
                         </Col>
                         <Col xs={12} md={6}>
                             <TopCarousel  height={125*5}>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
-                                <TopCarouselItem>
-                                    <img src={require('../images/6.jpg')} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
-                                    <Link to="/message">吃货来跟你聊聊禾谷渔粉鱼汤的奥秘</Link>
-                                    <p>修养身心，滋阴补阳，禾谷渔粉教您养生之道。</p>
-                                </TopCarouselItem>
+                                {this.state.HomeMessage.map((message, i) =>
+                                    <TopCarouselItem key={i}>
+                                        <img src={'http://localhost:3000/api/images?path='+message.url} style={{width:142+'px',height:125+'px'}} data-bd-imgshare-binded="1"/>
+                                        <Link to="/message">{message.title}</Link>
+                                        <div dangerouslySetInnerHTML={{__html: message.content}}/>
+                                    </TopCarouselItem>
+                                )}
                             </TopCarousel>
                         </Col>
                     </Row>

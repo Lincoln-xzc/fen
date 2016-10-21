@@ -22,7 +22,7 @@ module.exports = {
         progress: true,
         contentBase: '/.app',
         host: 'localhost',
-        port: 8080,
+        port: 8090
         /*proxy: {
             '/api/!*':{
                 target: 'http://localhost:3000',
@@ -32,7 +32,7 @@ module.exports = {
     },
     entry: [
         'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080',
+        'webpack-dev-server/client?http://localhost:8090',
         path.resolve(__dirname, 'app/app.js')],
     output:{
         path: __dirname + '/build',
@@ -79,7 +79,7 @@ module.exports = {
     //插件项
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
+        new OpenBrowserPlugin({url: 'http://localhost:8090'}),
         new ExtractTextPlugin('app.css', {
             allChunks: true,
             disable: false
