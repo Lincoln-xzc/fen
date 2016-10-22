@@ -3,25 +3,47 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
+import 'whatwg-fetch';
+import SERVICE from '../../api/config';
 
 export default  class Detail extends React.Component{
+    constructor(props){
+        super(props);
+        this.state= {
+            'NewsDetail':[]
+        };
+
+    }
+    componentDidMount(){
+        let NewsDetail = [];
+        console.log(this.props.routeParams.id);
+        let id = this.props.routeParams.id;
+        fetch(SERVICE.DETAILS+id,{
+            method: 'POST',
+            headers: SERVICE.HEADERS,
+        }).then((response) => {
+            return response.json();
+        }).then((result) => {
+            NewsDetail = result.data;
+            this.setState({'NewsDetail': NewsDetail});
+        });
+    };
     render(){
         return(
             <div className="detail">
                 <h4>信息详情</h4>
-                <div className="rui-center">
-                    <h3>经营红薯粉场如何实现快速盈利</h3>
-                    <span className="rui-block">上传时间：2015-11-12 16:23:47</span>
-                </div>
-                <div className="rui-content">
-                    <p className="rui-center"><img src='/app/images/6.jpg'/></p>
-                    <p>禾谷渔粉店的经营者都想要在短时间内实现店铺的快速盈利，那么都有哪些经营方法能够保障店铺的可观盈利以及实现快速盈利的要点呢?开来看看小编接下来的分析吧。
-                        鱼粉店的员工管理规划不能少，对于刚刚创业的新手来说管理员工是经营中重要的一环。如果员工管理不好，不仅会影响销售业绩，对禾谷渔粉品牌形象也会有影响。因此，加盟商在管理员工的时候，一定要注意管理好员工的形象及员工之间的矛盾，让员工之间彼此和谐相处，从而使禾谷渔粉店得以健康成长。
-                        加盟商必须有客户至上，多为顾客着想的经营理念，如果没有顾客，禾谷渔粉店的发展也就无从谈起。因此，加盟商在经营店铺时，一定要为顾客着想，从满足顾客需求的角度出发，把握市场商机。学会倾听顾客的需求和建议，积极解决顾客提出的问题，提高了顾客满意度才会有回头客和口碑。
-                        加盟商的诚信经营思想，俗话说，人无信不立，企业不信则衰。禾谷渔粉店要以“诚”经营自己的店，不能蒙骗消费者。诚信是禾谷渔粉店长久经营的根本，也是做人的一个品质体现。
-                        其实要想实现快速盈利的要点还有很多，我们简单的从管理，经营态度等方面给大家提了一个醒，希望对大家有所帮助，再者影响禾谷渔粉店发展的关键还是在美食，服务，价位这些细节上，都需要加盟商去多多注意才行，这样经营才能保证利润多多!
-                    </p>
-                </div>
+                {this.state.NewsDetail.map((news,i)=>
+                    <div className="row" key={i}>
+                        <div className="rui-center">
+                            <h3>{news.title}</h3>
+                            <span className="rui-block">上传时间：{news.update_time}</span>
+                        </div>
+                        <div className="rui-content">
+                            <p className="rui-center"><img src={'http://localhost:3000/api/images?path='+news.url} style={{width:400+'px'}}/></p>
+                            <div dangerouslySetInnerHTML={{__html: news.content}}/>
+                        </div>
+                    </div>
+                )}
             </div>
         )
     }

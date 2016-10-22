@@ -10,6 +10,7 @@ module.exports = {
     },
     FINDBYCONDITION: LOCALHOST + 'main/findByCondition',
     MESSAGE: LOCALHOST + 'message/save',
+    DETAILS: LOCALHOST + '/list/findById/',
     END: {
         HOME: {
 

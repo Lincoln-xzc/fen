@@ -37,7 +37,7 @@ export default  class Dynamic extends React.Component{
                     <ul>
                         {this.state.CompanyDynamic.map((dynamic,i)=>
                             <li key={i}>
-                                <Link to="/cultural/dynamic/detail"><span>{dynamic.title}</span></Link>
+                                <Link to={"/cultural/dynamic/detail/"+dynamic.id}><span>{dynamic.title}</span></Link>
                                 <span className="rui-right">{dynamic.update_time}</span>
                             </li>
                         )}

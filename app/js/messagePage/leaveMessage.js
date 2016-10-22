@@ -29,8 +29,8 @@ export default  class Leave extends React.Component{
             method: 'POST',
             headers: SERVICE.HEADERS,
             body: JSON.stringify({
-                username: this.state.mobile,
-                password: this.state.content
+                mobile: this.state.mobile,
+                content: this.state.content
             })
         }).then((response)=> {
             return response.json();

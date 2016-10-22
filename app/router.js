@@ -55,8 +55,8 @@ export default class Routers extends React.Component{
                         <IndexRoute component={News}/>
                         <Route path='/cultural/news'component={News}/>
                         <Route path='/cultural/dynamic' component={Dynamic}/>
-                        <Route path='/cultural/news/detail' component={Detail}/>
-                        <Route path='/cultural/dynamic/detail' component={Detail} />
+                        <Route path='/cultural/news/detail/:id' component={Detail}/>
+                        <Route path='/cultural/dynamic/detail/:id' component={Detail} />
                     </Route>
                     <Route path = '/product' component = {Product}>
                         <IndexRoute component={Process}/>

@@ -36,7 +36,7 @@ export default  class News extends React.Component{
                     <ul>
                         {this.state.CompanyNews.map((news,i)=>
                                 <li key={i}>
-                                    <Link to="/cultural/dynamic/detail"><span>{news.title}</span></Link>
+                                    <Link to={"/cultural/dynamic/detail?id="+news.id}><span>{news.title}</span></Link>
                                     <span className="rui-right">{news.update_time}</span>
                                 </li>
                         )}
