@@ -5,8 +5,8 @@
   "main": "app/app.js",
   "scripts": {
     "test": "fen",
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base app",
-    "build": "./node_modules/.bin/webpack --progress --colors --config webpack.prod.config.js"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

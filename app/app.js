@@ -16,5 +16,5 @@ import './style/RichEditor.css';
 import './style/react-select.css';
 
 render(
-    <Routers history = {browserHistory}/>
+    <Routers/>
     , document.getElementById('root'));

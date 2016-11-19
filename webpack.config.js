@@ -8,11 +8,11 @@ var webpack = require('webpack');
 
 
 //编译后自动打开浏览器
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+//var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 //单独样式文件
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var node_modules = path.resolve(__dirname, 'node_modules');
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
+//var node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
     devServer: {
@@ -22,7 +22,7 @@ module.exports = {
         progress: true,
         contentBase: '/.app',
         host: 'localhost',
-        port: 8090
+        port: 8080
         /*proxy: {
             '/api/!*':{
                 target: 'http://localhost:3000',
@@ -30,23 +30,19 @@ module.exports = {
             }
         }*/
     },
-    entry: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8090',
-        path.resolve(__dirname, 'app/app.js')],
-    output:{
-        path: __dirname + '/build',
-        filename: './bundle.js',
-        publicPath: '/'
+    entry: path.resolve(__dirname, 'app/app.js'),
+        output:{
+            path: path.resolve(__dirname, 'build'),
+            filename: 'bundle.js'
     },
     module: {
         //加载器配置
         loaders: [
             {
                 test:/\.(jsx?|js)$/,
-                exclude: path.resolve(__dirname,node_modules),
+                exclude: /node_modules/,
                 loader: 'babel-loader',
-               /* query: {
+                /*query: {
                     presets: ['es2015', 'react']
                 }*/
             },
@@ -72,17 +68,22 @@ module.exports = {
        //提高webpack搜索的速度
        alias: {}
     },
-    devtool: 'source-map',
-    'display-error-details': true,
+    devServer: {
+        hot: true,
+        inline: true
+    },
+    /*devtool: 'source-map',
+    'display-error-details': true,*!/
+    */
     //使用externals可以将react分离，然后用<script>单独将react引入
-    externals: [],
+   // externals: [],
     //插件项
-    plugins: [
+   /* plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({url: 'http://localhost:8090'}),
         new ExtractTextPlugin('app.css', {
             allChunks: true,
             disable: false
         })
-    ]
+    ]*/
 };

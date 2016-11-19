@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import {Router, Route, IndexRoute} from 'react-router';
+import {Router, Route, IndexRoute,hashHistory} from 'react-router';
 import Index from './js/index.js';
 import Center from './js/center.js';
 import Contact from './js/contact.js';
@@ -36,7 +36,7 @@ import Describe from './js/ended/home/describe.js';
 export default class Routers extends React.Component{
     render(){
         return (
-            <Router history = {this.props.history}>
+            <Router history = {hashHistory}>
                 <Route path = '/' component= {Index}>
                     <IndexRoute component={Home} />
                     <Route path = '/home' component = {Home} />
