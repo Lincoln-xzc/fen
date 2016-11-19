@@ -16,7 +16,7 @@ export default  class Menu extends React.Component{
                 </div>
                 <div className = 'title'>
                     <Link to = '/' className = 'photo'>
-                        <img src={require('../images/logo.jpg')}/>
+                        <img src={require('../images/logo1.jpg')} style={{width:20 + 'px', height: 10 + 'px'}}/>
                     </Link>
                     <ul className = "rui-nav rui-bar">
                         <li><Link to='/'>首页</Link></li>
